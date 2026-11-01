@@ -443,6 +443,8 @@ input:focus, textarea:focus, select:focus { outline: none; border-bottom-color: 
   .page-title { font-size: 32px; }
   .hero__body { order: 4; }
   .events-wrap { grid-template-columns: minmax(0, 1fr); }
+  /* スマホでは Instagram の投稿は最新の1件だけ（縦に長くなりすぎるため） */
+  .ig-feed__list li:nth-child(n+2) { display: none; }
   .event { grid-template-columns: 64px minmax(0, 1fr); padding: 14px 16px; column-gap: 14px; }
   .event__day { font-size: 28px; }
   .event__add { grid-column: 2; justify-self: start; margin-top: 4px; }

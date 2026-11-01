@@ -3,6 +3,14 @@
   var cur = document.querySelector(".tab.is-current");
   if (cur && cur.scrollIntoView) cur.scrollIntoView({ block: "nearest", inline: "center" });
 
+  // 出店予定：Google カレンダーの予定と手入力の予定が混ざっているので、日付順に並べ直す。
+  var evList = document.querySelector(".events");
+  if (evList) {
+    Array.prototype.slice.call(evList.querySelectorAll(".event"))
+      .sort(function (a, b) { return a.dataset.start < b.dataset.start ? -1 : a.dataset.start > b.dataset.start ? 1 : 0; })
+      .forEach(function (li) { evList.appendChild(li); });
+  }
+
   // 出店予定のうち、もう終わったものを隠す（サイトは数時間おきにしか組み立て直さないため）。
   var events = document.querySelectorAll(".event[data-end]");
   if (events.length) {
@@ -19,8 +27,11 @@
   // 出店予定の月カレンダー。予定のある日に印を付け、押すとその予定まで移動する。
   var cal = document.querySelector(".cal");
   if (cal) {
-    var evs = [];
-    try { evs = JSON.parse(cal.dataset.events || "[]"); } catch (e) { evs = []; }
+    // 予定は一覧の各行から読む（一覧と同じ順番・同じ中身になるように）
+    var items = document.querySelectorAll(".event");
+    var evs = Array.prototype.map.call(items, function (li) {
+      return { start: li.dataset.start, end: li.dataset.end, title: li.querySelector(".event__title").textContent.replace(/\u200b/g, "") };
+    });
     var grid = cal.querySelector(".cal__grid"), title = cal.querySelector(".cal__title");
     var today = new Date(), view = new Date(today.getFullYear(), today.getMonth(), 1);
     var key = function (d) { return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate(); };
@@ -34,7 +45,6 @@
       if (/T00:00:00/.test(ev.end) && last > d) last.setDate(last.getDate() - 1);
       for (; d <= last; d.setDate(d.getDate() + 1)) (byDay[key(d)] = byDay[key(d)] || []).push(i);
     });
-    var items = document.querySelectorAll(".event");
     var draw = function () {
       title.textContent = view.getFullYear() + "年 " + (view.getMonth() + 1) + "月";
       grid.textContent = "";

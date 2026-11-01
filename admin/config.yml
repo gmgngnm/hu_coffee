@@ -140,6 +140,22 @@ collections:
               - { name: image, label: 画像, widget: image, media_folder: /assets/img/instagram, public_folder: /assets/img/instagram }
               - { name: url, label: 投稿のURL, widget: string, required: false, hint: "投稿の「…」→「リンクをコピー」。空欄ならアカウントのページへ" }
               - { name: caption, label: 本文の冒頭, widget: text, hint: "長くても4行ほどで切れて表示されます" }
+      - name: events
+        label: 出店予定（手入力）
+        file: _data/events.yml
+        fields:
+          - name: events
+            label: 予定
+            label_singular: 予定
+            widget: list
+            summary: "{{fields.date}} {{fields.title}}"
+            hint: "Google カレンダーにつないでいれば、そちらの予定も一緒に並びます。終わった予定は自動で隠れます"
+            fields:
+              - { name: date, label: 日付, widget: datetime, format: "YYYY-MM-DD", time_format: false }
+              - { name: title, label: 内容, widget: string }
+              - { name: time, label: 時間, widget: string, required: false, hint: "例：10:00–15:00。空なら「終日」" }
+              - { name: location, label: 場所, widget: string, required: false }
+              - { name: note, label: ひとこと, widget: string, required: false }
       - name: club
         label: 研究会の情報
         file: _data/club.yml

@@ -5,6 +5,7 @@ GitHub Actions（`.github/workflows/pages.yml`）で `actions/jekyll-build-pages
 Instagram の埋め込み風の枠1つにまとめて出す（アカウントの持ち主が別なので、API 連携は見送った）。
 ホーム下部の出店予定は、Actions が Secret `GCAL_ICS_URL`（Google カレンダーの iCal 非公開 URL）を
 `scripts/fetch_calendar.py` で読み、`_data/calendar.json` に書く（3時間ごとに再ビルド）。繰り返し予定は載せない。
+手入力の予定 `_data/events.yml` も同じ一覧に出し、並べ替えと月カレンダーの印は `main.js` が各行の `data-start`/`data-end` から作る。
 終わった予定は `main.js` が `data-end` を見て隠す。`_data/calendar.json` は空のままコミットする（見本の予定を入れない）。
 使えるプラグインは GitHub Pages が許すもの（jekyll-feed / seo-tag / sitemap）だけ。
 

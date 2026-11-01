@@ -1,0 +1,22 @@
+{%- comment -%}
+  出店予定の1行。Google カレンダー由来（日時は ISO 形式）と手入力（日付だけ・終日）の両方を受ける。
+{%- endcomment -%}
+{%- if include.manual -%}
+  {%- assign ev_start = include.start | append: "T00:00:00+09:00" -%}
+  {%- assign ev_end = include.end | append: "T00:00:00+09:00" -%}
+  {%- assign ev_month = include.month | date: "%-m" | append: "月" -%}
+  {%- assign ev_day = include.day | date: "%-d" -%}
+  {%- assign ev_time = include.time | default: "終日" -%}
+{%- else -%}
+  {%- assign ev_start = include.start -%}{%- assign ev_end = include.end -%}
+  {%- assign ev_month = include.month -%}{%- assign ev_day = include.day -%}{%- assign ev_time = include.time -%}
+{%- endif -%}
+<li class="event" data-start="{{ ev_start }}" data-end="{{ ev_end }}">
+      <p class="event__date"><span class="event__month">{{ ev_month }}</span><span class="event__day">{{ ev_day }}</span><span class="event__wday">（{{ include.wday }}）</span></p>
+      <div class="event__body">
+        <h3 class="event__title">{{ include.title }}</h3>
+        <p class="event__meta">{% if include.until != "" %}{{ include.until }}　{% endif %}{{ ev_time }}{% if include.location != "" and include.location %}　<span class="event__place">{{ include.location }}</span>{% endif %}</p>
+        {%- if include.note != "" and include.note %}<p class="event__note">{{ include.note }}</p>{% endif %}
+      </div>
+      <a class="event__add" href="{{ include.add_url }}" target="_blank" rel="noopener noreferrer">Google カレンダーに追加</a>
+    </li>
