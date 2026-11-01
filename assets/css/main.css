@@ -135,7 +135,7 @@ h1, h2, h3 { font-family: var(--f-head); font-weight: 400; line-height: 1.45; le
 /* 左に挨拶、右の余白に活動の写真 */
 .hero__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 440px); gap: clamp(32px, 5vw, 64px); align-items: start; }
 /* 写真はプリントを3枚、ずらして貼ったように。大きい出店の写真を上に、下に2枚を重ねる */
-.hero__photos { position: relative; display: grid; grid-template-columns: 1.25fr 1fr; grid-template-rows: auto auto; padding-top: 8px; }
+.hero__photos { position: relative; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); grid-template-rows: auto auto; padding-top: 8px; }
 .snap { margin: 0; background: var(--field); padding: 8px 8px 26px; box-shadow: 0 2px 0 rgba(0,0,0,.04), 0 12px 24px -12px rgba(60,40,10,.45); position: relative; }
 .snap img { display: block; width: 100%; height: auto; }
 .snap--stall { grid-column: 1 / -1; transform: rotate(1.6deg); z-index: 1; }
@@ -209,7 +209,7 @@ h1, h2, h3 { font-family: var(--f-head); font-weight: 400; line-height: 1.45; le
 .entry__excerpt { grid-column: 1 / -1; font-size: 14px; color: var(--ink-2); line-height: 1.75; }
 .entry__tags { grid-column: 1 / -1; display: flex; gap: 6px; margin-top: 10px; }
 .entry__tags span, .stamps li { font-size: 11.5px; border: 1px solid currentColor; color: var(--accent); padding: 1px 8px; border-radius: 99px; line-height: 1.7; }
-.entries--list { grid-template-columns: 1fr; max-width: 820px; }
+.entries--list { grid-template-columns: minmax(0, 1fr); max-width: 820px; }
 .entries--list .entry__link { grid-template-columns: 7em 6.5em 1fr; }
 .entries--list .entry__date { justify-self: start; }
 .entries--list .entry__title { grid-column: 3; grid-row: 1 / span 2; margin: 0; }
@@ -272,13 +272,15 @@ h1, h2, h3 { font-family: var(--f-head); font-weight: 400; line-height: 1.45; le
 /* ---------- SHOP ---------- */
 /* 6品なので、広い画面は3列×2段。狭くなるにつれ2列、1列 */
 .products { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(18px, 2.6vw, 28px); }
-.product { display: flex; flex-direction: column; background: var(--field); padding: 10px 10px 18px; box-shadow: 0 2px 0 rgba(0,0,0,.04), 0 12px 24px -14px rgba(60,40,10,.45); }
+.product { min-width: 0; display: flex; flex-direction: column; background: var(--field); padding: 10px 10px 18px; box-shadow: 0 2px 0 rgba(0,0,0,.04), 0 12px 24px -14px rgba(60,40,10,.45); }
 .product:nth-child(3n+1) { transform: rotate(-.6deg); }
 .product:nth-child(3n+2) { transform: rotate(.5deg); }
 .product__pic { position: relative; background: var(--paper-2); color: var(--accent); aspect-ratio: 4 / 3; display: grid; place-items: center; margin-bottom: 14px; }
 .product__pic .pic { width: 46%; height: auto; }
-.product__pic--photo { overflow: hidden; }
-.product__pic--photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* 写真は枠に絶対配置で敷く。grid の中に置くと、iPhone の Safari 系では写真の元の幅（960px）で
+   列が押し広げられ、カードも画面もはみ出すため */
+.product__pic--photo { display: block; overflow: hidden; }
+.product__pic--photo img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; display: block; }
 /* 実物の写真に差し替えるまでの目印 */
 .product__note { position: absolute; left: 8px; bottom: 8px; font-size: 11px; padding: 1px 8px; background: rgba(250,244,231,.88); color: var(--ink-2); border-radius: 2px; }
 .product__badge { position: absolute; top: 10px; right: 10px; font-size: 12px; padding: 2px 10px; border-radius: 99px; background: var(--field); color: var(--accent); border: 1px solid currentColor; }
@@ -409,7 +411,7 @@ input:focus, textarea:focus, select:focus { outline: none; border-bottom-color: 
 /* ---------- 狭い画面 ---------- */
 @media (max-width: 860px) {
   .products { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .hero__grid { grid-template-columns: 1fr; }
+  .hero__grid { grid-template-columns: minmax(0, 1fr); }
   /* スマホでは「こんにちは。〜です!!」の直後に写真を挟み、そのあと本文。
      .hero__inner の中身を grid に直接並べて、順番を入れ替える */
   .hero__grid { row-gap: 0; }
@@ -430,23 +432,23 @@ input:focus, textarea:focus, select:focus { outline: none; border-bottom-color: 
   .hero__body p { font-size: 15px; line-height: 1.85; margin-bottom: .95em; letter-spacing: .02em; }
   .hero__body .hero__cheers { font-size: 17px; line-height: 1.75; margin-top: 1.3em; }
   /* 写真は縦に積まず、大きい1枚の右に小さい2枚を重ねて、縦の長さを抑える */
-  .hero__photos { grid-template-columns: 1.45fr 1fr; grid-template-rows: auto auto; width: 100%; max-width: 480px; margin: 4px auto 28px; padding: 8px 6px 0 0; }
+  .hero__photos { grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); grid-template-rows: auto auto; width: 100%; max-width: 480px; margin: 4px auto 28px; padding: 8px 6px 0 0; }
   .snap { padding: 5px 5px 14px; }
   .snap::before { width: 46px; height: 13px; top: -6px; margin-left: -23px; }
   .snap--stall { grid-column: 1; grid-row: 1 / span 2; align-self: center; }
   .snap--counter { grid-column: 2; grid-row: 1; margin: 0 0 0 -10px; }
   .snap--pour { grid-column: 2; grid-row: 2; margin: -10px 0 0 -2px; }
-  .home-lower { grid-template-columns: 1fr; }
+  .home-lower { grid-template-columns: minmax(0, 1fr); }
   .home-blog, .home-visit, .home-ig { grid-column: 1; grid-row: auto; }
   .home-ig { margin-bottom: clamp(40px, 6vw, 64px); max-width: 420px; width: 100%; justify-self: center; }
-  .about-grid { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: minmax(0, 1fr); }
   .datasheet { background: var(--field); position: sticky; top: 20px; padding: 6px 4px 4px; box-shadow: 0 2px 0 rgba(0,0,0,.04), 0 12px 24px -14px rgba(60,40,10,.45); transform: rotate(.6deg); }
-  .page-hero { grid-template-columns: 1fr; }
+  .page-hero { grid-template-columns: minmax(0, 1fr); }
   /* ホーム以外の頭の写真は、スマホでは出さない（本題までのスクロールを短くする） */
   .page-hero .snap--solo { display: none; }
 }
 @media (max-width: 640px) {
-  .products { grid-template-columns: 1fr; }
+  .products { grid-template-columns: minmax(0, 1fr); }
   body { font-size: 15.5px; }
   .site-head { padding-top: 16px; }
   .brand__sign { height: 40px; }
@@ -462,11 +464,11 @@ input:focus, textarea:focus, select:focus { outline: none; border-bottom-color: 
   .tab { min-width: 0; padding: 8px 9px 7px; letter-spacing: 0; }
   .tab__label { font-size: 15px; letter-spacing: 0; }
   .tab.is-current { padding-bottom: 11px; }
-  .field-row { grid-template-columns: 1fr; }
-  .entries { grid-template-columns: 1fr; }
+  .field-row { grid-template-columns: minmax(0, 1fr); }
+  .entries { grid-template-columns: minmax(0, 1fr); }
   .entries--list .entry__link { grid-template-columns: auto 1fr; }
   .entries--list .entry__date { justify-self: end; }
   .entries--list .entry__title, .entries--list .entry__excerpt, .entries--list .entry__tags { grid-column: 1 / -1; grid-row: auto; margin-top: 6px; }
-  .site-foot__inner { grid-template-columns: 1fr; }
+  .site-foot__inner { grid-template-columns: minmax(0, 1fr); }
   .timeline li { grid-template-columns: 5em 1fr; }
 }
