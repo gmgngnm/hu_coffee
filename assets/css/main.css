@@ -387,14 +387,16 @@ input:focus, textarea:focus, select:focus { outline: none; border-bottom-color: 
 @media (max-width: 860px) {
   .products { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .hero__grid { grid-template-columns: 1fr; }
-  .hero__photos { max-width: 520px; margin: 8px auto 0; }
+  /* スマホでは写真を先に見せる（文章を読む前に雰囲気が伝わるように） */
+  .hero__photos { order: -1; max-width: 520px; margin: 0 auto 28px; }
   .home-lower { grid-template-columns: 1fr; }
   .home-blog, .home-visit, .home-ig { grid-column: 1; grid-row: auto; }
   .home-ig { margin-bottom: clamp(40px, 6vw, 64px); max-width: 420px; width: 100%; justify-self: center; }
   .about-grid { grid-template-columns: 1fr; }
   .datasheet { background: var(--field); position: sticky; top: 20px; padding: 6px 4px 4px; box-shadow: 0 2px 0 rgba(0,0,0,.04), 0 12px 24px -14px rgba(60,40,10,.45); transform: rotate(.6deg); }
   .page-hero { grid-template-columns: 1fr; }
-  .page-hero .snap--solo { max-width: 420px; justify-self: center; }
+  /* ホーム以外の頭の写真は、スマホでは出さない（本題までのスクロールを短くする） */
+  .page-hero .snap--solo { display: none; }
 }
 @media (max-width: 640px) {
   .products { grid-template-columns: 1fr; }
