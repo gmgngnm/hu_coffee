@@ -423,8 +423,8 @@ input:focus, textarea:focus, select:focus { outline: none; border-bottom-color: 
   .site-head { padding-top: 16px; }
   .brand__sign { height: 40px; }
   .brand { max-width: 100%; }
-  .brand__sign { flex: 0 1 auto; min-width: 0; height: auto; width: min(166px, calc(100vw - 2 * var(--gutter) - 140px)); }
-  .brand__logo { height: 52px; }
+  .brand__sign { flex: 0 1 auto; min-width: 0; height: auto; width: min(128px, calc(100vw - 2 * var(--gutter) - 120px)); }
+  .brand__logo { height: 40px; }
   .brand { gap: 12px; }
   /* PC と同じく、ロゴは左・タブは右。タブは字を小さくして右側にまとめる */
   .tabs__list { gap: 3px; }
