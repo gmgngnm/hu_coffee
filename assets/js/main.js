@@ -11,9 +11,8 @@
       if (Date.parse(li.dataset.end) <= now) li.hidden = true; else left++;
     });
     if (!left) {
-      var list = document.querySelector(".events"), empty = document.querySelector(".events__empty");
-      if (list) list.hidden = true;
-      if (empty) empty.hidden = false;
+      var side = document.querySelector(".events-side");
+      if (side) side.hidden = true;
     }
   }
 

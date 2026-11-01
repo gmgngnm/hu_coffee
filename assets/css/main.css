@@ -274,7 +274,6 @@ h1, h2, h3 { font-family: var(--f-head); font-weight: 400; line-height: 1.45; le
 .event__place::before { content: "@ "; }
 .event__add { font-size: 13px; white-space: nowrap; padding: 7px 12px; border: 1px solid var(--accent); border-radius: 99px; text-decoration: none; }
 .event__add:hover { background: var(--accent); color: var(--paper); }
-.events__empty { margin: 0; padding: 18px 20px; background: var(--field); color: var(--ink-2); font-size: 14.5px; }
 [hidden] { display: none !important; }
 
 /* ---------- 各ページ共通の頭：ホームと同じ「左に文、右に貼った写真」 ---------- */

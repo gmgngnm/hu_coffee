@@ -116,7 +116,7 @@ nav: home
     </div>
     <div class="cal__grid" role="grid"></div>
   </div>
-  <div class="events-side">
+  <div class="events-side"{% if events.size == 0 %} hidden{% endif %}>
   <ol class="events"{% if events.size == 0 %} hidden{% endif %}>
     {%- for e in events %}
     <li class="event" data-end="{{ e.end }}">
@@ -130,7 +130,6 @@ nav: home
     </li>
     {%- endfor %}
   </ol>
-  <p class="events__empty"{% if events.size > 0 %} hidden{% endif %}>いまのところ決まっている出店はありません。決まり次第、ここと Instagram でお知らせします。</p>
   </div>
   </div>
 </section>
