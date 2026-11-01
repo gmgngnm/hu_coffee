@@ -128,14 +128,21 @@ h1, h2, h3 { font-family: var(--f-head); font-weight: 700; line-height: 1.4; let
 
 /* ---------- ホーム ---------- */
 .hero { padding-bottom: clamp(40px, 6vw, 72px); }
-/* 左に挨拶、右の余白に Instagram の最新3件 */
-.hero__grid { display: grid; grid-template-columns: minmax(0, 1fr) 220px; gap: clamp(32px, 5vw, 72px); align-items: start; }
-.hero__ig { padding-top: 6px; }
-.hero__ig .ig { grid-template-columns: 1fr; gap: 22px; }
-.ig__more { display: inline-block; margin-top: 18px; }
-.ig--empty .ig__item img { object-fit: contain; padding: 18%; background: var(--paper-2); }
-.ig__note { position: absolute; left: 0; right: 0; bottom: 4px; text-align: center; font-size: 12.5px; line-height: 1.5; color: var(--ink-2); }
-.ig--empty .ig__item a { padding-bottom: 44px; }
+/* 左に挨拶、右の余白に活動の写真 */
+.hero__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 440px); gap: clamp(32px, 5vw, 64px); align-items: start; }
+/* 写真はプリントを3枚、ずらして貼ったように。大きい出店の写真を上に、下に2枚を重ねる */
+.hero__photos { position: relative; display: grid; grid-template-columns: 1.25fr 1fr; grid-template-rows: auto auto; padding-top: 8px; }
+.snap { margin: 0; background: var(--field); padding: 8px 8px 26px; box-shadow: 0 2px 0 rgba(0,0,0,.04), 0 12px 24px -12px rgba(60,40,10,.45); position: relative; }
+.snap img { display: block; width: 100%; height: auto; }
+.snap--stall { grid-column: 1 / -1; transform: rotate(1.6deg); z-index: 1; }
+.snap--counter { grid-column: 1; margin: -38px 0 0 -14px; transform: rotate(-3.2deg); z-index: 2; align-self: start; }
+.snap--pour { grid-column: 2; margin: 18px -6px 0 -26px; transform: rotate(2.6deg); z-index: 3; }
+/* マスキングテープ */
+.snap::before { content: ""; position: absolute; top: -9px; left: 50%; width: 76px; height: 20px; margin-left: -38px; background: rgba(155, 28, 46, .22); transform: rotate(-4deg); }
+.snap--counter::before { background: rgba(13, 90, 44, .22); left: 22%; }
+.snap--pour::before { background: rgba(201, 169, 122, .6); left: 70%; transform: rotate(6deg); }
+.home-ig { margin-bottom: clamp(48px, 7vw, 80px); }
+.home-ig .ig { grid-template-columns: repeat(3, minmax(0, 220px)); }
 .hero__body { max-width: 40em; }
 .hero__title { font-size: clamp(28px, 5vw, 50px); line-height: 1.45; font-weight: 900; letter-spacing: .02em; margin: 0 0 .9em; }
 .hero__title { font-size: clamp(26px, 5vw, 50px); }
@@ -335,8 +342,8 @@ input:focus, textarea:focus, select:focus { outline: none; border-bottom-color: 
 /* ---------- 狭い画面 ---------- */
 @media (max-width: 860px) {
   .hero__grid { grid-template-columns: 1fr; }
-  .hero__ig .ig { grid-template-columns: repeat(3, 1fr); gap: 12px; }
-  .hero__ig .ig--empty { grid-template-columns: minmax(0, 200px); }
+  .hero__photos { max-width: 520px; margin: 8px auto 0; }
+  .home-ig .ig { grid-template-columns: repeat(3, 1fr); gap: 12px; }
   .about-grid { grid-template-columns: 1fr; }
   .datasheet { position: static; }
   .bean { grid-template-columns: 1fr; }

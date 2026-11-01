@@ -20,35 +20,40 @@ nav: home
     </p>
   </div>
 
-  <aside class="hero__ig" aria-labelledby="ig-head">
-    <p class="label" id="ig-head">INSTAGRAM ／ 最新の投稿</p>
-    {%- if ig and ig.size > 0 %}
-    <ul class="ig">
-      {%- for g in ig limit: 3 -%}
-      <li class="ig__item">
-        <a href="{{ g.permalink }}" target="_blank" rel="noopener noreferrer">
-          <img src="{{ g.image | relative_url }}" alt="{{ g.caption | default: 'Instagram の投稿' | escape }}" loading="lazy" width="320" height="320">
-          {% if g.video %}<span class="ig__video" aria-label="動画">▶</span>{% endif %}
-          {% if g.timestamp %}<time datetime="{{ g.timestamp }}">{{ g.timestamp | date: "%Y.%m.%d" }}</time>{% endif %}
-        </a>
-      </li>
-      {%- endfor -%}
-    </ul>
-    {%- else %}
-    {%- comment -%} 取得の設定がまだ・失敗したときは、写真の代わりにアカウントへの入口を置く {%- endcomment -%}
-    <ul class="ig ig--empty">
-      <li class="ig__item">
-        <a href="https://www.instagram.com/{{ site.instagram }}/" target="_blank" rel="noopener noreferrer">
-          <img src="{{ '/assets/img/icon-512.png' | relative_url }}" alt="" width="320" height="320">
-          <span class="ig__note">最新の投稿は<br>Instagram で</span>
-        </a>
-      </li>
-    </ul>
-    {%- endif %}
-    <a class="more ig__more" href="https://www.instagram.com/{{ site.instagram }}/" target="_blank" rel="noopener noreferrer">@{{ site.instagram }} をもっと見る →</a>
-  </aside>
+  {%- comment -%} 活動の写真3枚を、ノートに貼ったプリントのように少しずつ重ねて置く {%- endcomment -%}
+  <div class="hero__photos">
+    <figure class="snap snap--stall">
+      <img src="{{ '/assets/img/home/stall-640.jpg' | relative_url }}" srcset="{{ '/assets/img/home/stall-640.jpg' | relative_url }} 640w, {{ '/assets/img/home/stall.jpg' | relative_url }} 1178w" sizes="(max-width: 860px) 90vw, 400px" width="1178" height="990" alt="北大珈琲研究会のテントでの出店。麻袋を飾ったカウンターでハンドドリップしている">
+    </figure>
+    <figure class="snap snap--counter">
+      <img src="{{ '/assets/img/home/counter-640.jpg' | relative_url }}" srcset="{{ '/assets/img/home/counter-640.jpg' | relative_url }} 640w, {{ '/assets/img/home/counter.jpg' | relative_url }} 858w" sizes="(max-width: 860px) 55vw, 260px" width="858" height="512" alt="カウンター席に並んでコーヒーを待つお客さん" loading="lazy">
+    </figure>
+    <figure class="snap snap--pour">
+      <img src="{{ '/assets/img/home/pourover-640.jpg' | relative_url }}" srcset="{{ '/assets/img/home/pourover-640.jpg' | relative_url }} 640w, {{ '/assets/img/home/pourover.jpg' | relative_url }} 674w" sizes="(max-width: 860px) 45vw, 200px" width="674" height="660" alt="屋外でドリッパーにお湯を注いでいるところ" loading="lazy">
+    </figure>
+  </div>
   </div>
 </section>
+
+{%- if ig and ig.size > 0 %}
+<section class="wrap home-ig">
+  <div class="sec-head">
+    <h2>Instagram の最新の投稿</h2>
+    <a class="more" href="https://www.instagram.com/{{ site.instagram }}/" target="_blank" rel="noopener noreferrer">@{{ site.instagram }} をもっと見る →</a>
+  </div>
+  <ul class="ig">
+    {%- for g in ig limit: 3 -%}
+    <li class="ig__item">
+      <a href="{{ g.permalink }}" target="_blank" rel="noopener noreferrer">
+        <img src="{{ g.image | relative_url }}" alt="{{ g.caption | default: 'Instagram の投稿' | escape }}" loading="lazy" width="320" height="320">
+        {% if g.video %}<span class="ig__video" aria-label="動画">▶</span>{% endif %}
+        {% if g.timestamp %}<time datetime="{{ g.timestamp }}">{{ g.timestamp | date: "%Y.%m.%d" }}</time>{% endif %}
+      </a>
+    </li>
+    {%- endfor -%}
+  </ul>
+</section>
+{%- endif %}
 
 <section class="wrap home-visit">
   <div class="note-box">
