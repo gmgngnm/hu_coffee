@@ -144,9 +144,7 @@ h1, h2, h3 { font-family: var(--f-head); font-weight: 400; line-height: 1.45; le
 .snap::before { content: ""; position: absolute; top: -9px; left: 50%; width: 76px; height: 20px; margin-left: -38px; background: rgba(155, 28, 46, .22); transform: rotate(-4deg); }
 .snap--counter::before { background: rgba(13, 90, 44, .22); left: 22%; }
 .snap--pour::before { background: rgba(201, 169, 122, .6); left: 70%; transform: rotate(6deg); }
-.home-ig { margin-bottom: clamp(48px, 7vw, 80px); }
 /* ホームの BLOG：一覧ページと同じ行の形を、ページの横幅いっぱいに使う */
-.home-blog { margin-bottom: clamp(48px, 7vw, 80px); }
 .entries.entries--wide { max-width: none; }
 /* 広い画面だけ「番号・日付・タイトルと抜粋・タグ」の横一列にする。狭い画面は一覧ページと同じ縦積み */
 @media (min-width: 641px) {
@@ -157,7 +155,23 @@ h1, h2, h3 { font-family: var(--f-head); font-weight: 400; line-height: 1.45; le
   .entries.entries--wide .entry__link::after { content: "→"; grid-column: 4; grid-row: 2; justify-self: end; color: var(--accent); transition: transform .15s; }
   .entries.entries--wide .entry__link:hover::after { transform: translateX(4px); }
 }
-.home-ig .ig { grid-template-columns: repeat(3, minmax(0, 220px)); }
+/* BLOG の右に Instagram の埋め込みを縦に3つ。下の付箋の横まで伸びてよい */
+.home-lower { display: grid; grid-template-columns: minmax(0, 1fr) 280px; grid-template-rows: auto 1fr; gap: 0 clamp(28px, 4vw, 56px); align-items: start; margin-bottom: clamp(48px, 7vw, 80px); }
+.home-blog { grid-column: 1; grid-row: 1; margin-bottom: clamp(40px, 6vw, 64px) !important; }
+.home-visit { grid-column: 1; grid-row: 2; }
+.home-ig { grid-column: 2; grid-row: 1 / span 2; }
+.ig-embeds { display: grid; gap: 18px; }
+/* 公式の埋め込みは幅326px未満にできず、3件並べると縦に長くなりすぎる。
+   広い画面では全体を0.8倍に縮めて、BLOG と付箋の横に収まる長さにする */
+@media (min-width: 861px) { .ig-embeds { zoom: .8; width: 350px; } }  /* 350 × 0.8 = 列幅 280px */
+/* Instagram の部品は最小幅 326px。読み込み前は白い枠だけを出しておき、ガタつきを抑える */
+.ig-embeds .instagram-media { background: #fff; border: 1px solid #dbdbdb; border-radius: 3px; margin: 0 !important; min-width: 326px; max-width: 100% !important; width: 100%; min-height: 420px; padding: 0; display: grid; place-items: center; box-shadow: 0 10px 22px -14px rgba(60,40,10,.4); }
+.ig-embeds .instagram-media a { font-size: 13px; }
+.ig-embeds iframe { box-shadow: 0 10px 22px -14px rgba(60,40,10,.4); }
+.ig-card { display: grid; justify-items: center; gap: 6px; background: var(--field); padding: 26px 18px 22px; text-decoration: none; color: var(--ink); box-shadow: 0 10px 22px -14px rgba(60,40,10,.4); transform: rotate(.8deg); }
+.ig-card img { background: var(--paper-2); border-radius: 50%; padding: 10px; }
+.ig-card__name { font-size: 17px; }
+.ig-card__note { font-size: 13px; color: var(--ink-2); }
 .hero__body { max-width: 40em; }
 .hero__title { font-size: clamp(28px, 5vw, 50px); line-height: 1.45; letter-spacing: .02em; margin: 0 0 .9em; }
 .hero__title { font-family: var(--f-hand-ja); font-weight: 400; font-size: clamp(28px, 5.4vw, 56px); line-height: 1.4; letter-spacing: .03em; }
@@ -214,16 +228,6 @@ h1, h2, h3 { font-family: var(--f-head); font-weight: 400; line-height: 1.45; le
 .roast__b.is-on.roast__b--5 { background: #2f190c; }
 .roast__name { font: 500 12px var(--f-mono); margin-left: 8px; color: var(--ink-2); }
 
-/* Instagram：ノートに貼ったプリント写真。一枚ずつ少しだけ角度を変える */
-.ig { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: clamp(14px, 2.4vw, 26px); }
-.ig__item a { position: relative; display: block; background: var(--field); padding: 8px 8px 30px; box-shadow: var(--shadow); text-decoration: none; transition: transform .18s; }
-.ig__item:nth-child(3n+1) a { transform: rotate(-1.4deg); }
-.ig__item:nth-child(3n+2) a { transform: rotate(.9deg); }
-.ig__item:nth-child(3n) a { transform: rotate(-.4deg); }
-.ig__item a:hover { transform: rotate(0) translateY(-3px); }
-.ig__item img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; background: var(--paper-2); }
-.ig__item time { position: absolute; left: 10px; bottom: 6px; font: 400 11px var(--f-mono); color: var(--ink-2); }
-.ig__video { position: absolute; right: 14px; top: 14px; width: 26px; height: 26px; border-radius: 50%; background: rgba(0,0,0,.55); color: #fff; font-size: 11px; display: grid; place-items: center; }
 
 .note-box { border: 1.5px solid var(--ink); background: var(--field); padding: clamp(22px, 4vw, 36px); position: relative; max-width: 760px; }
 .note-box::before { content: ""; position: absolute; top: -10px; left: 28px; width: 90px; height: 20px; background: rgba(201, 169, 122, .65); transform: rotate(-3deg); }
@@ -377,7 +381,9 @@ input:focus, textarea:focus, select:focus { outline: none; border-bottom-color: 
   .products { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .hero__grid { grid-template-columns: 1fr; }
   .hero__photos { max-width: 520px; margin: 8px auto 0; }
-  .home-ig .ig { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .home-lower { grid-template-columns: 1fr; }
+  .home-blog, .home-visit, .home-ig { grid-column: 1; grid-row: auto; }
+  .home-ig { margin-bottom: clamp(40px, 6vw, 64px); max-width: 420px; width: 100%; justify-self: center; }
   .about-grid { grid-template-columns: 1fr; }
   .datasheet { background: var(--field); position: sticky; top: 20px; padding: 6px 4px 4px; box-shadow: 0 2px 0 rgba(0,0,0,.04), 0 12px 24px -14px rgba(60,40,10,.45); transform: rotate(.6deg); }
   .page-hero { grid-template-columns: 1fr; }
@@ -398,8 +404,6 @@ input:focus, textarea:focus, select:focus { outline: none; border-bottom-color: 
   .tabs__list li { flex: 1 1 auto; }
   .tab { min-width: 0; padding: 9px 6px 8px; }
   .tab__label { font-size: 16px; letter-spacing: 0; }
-  .ig__item a { padding: 5px 5px 22px; }
-  .ig__item time { font-size: 9.5px; left: 6px; bottom: 4px; }
   .tab.is-current { padding-bottom: 12px; }
   .tab__label { font: 400 21px/1 var(--f-hand); letter-spacing: .06em; padding-top: 2px; }
 .tab.is-current .tab__label { font-weight: 400; color: var(--ink); }

@@ -125,6 +125,16 @@ collections:
                 fields:
                   - { name: size, label: 内容量, widget: string, hint: "例：100g" }
                   - { name: price, label: 価格（円）, widget: number, value_type: int, min: 0 }
+      - name: instagram_pick
+        label: Instagram の表示
+        file: _data/instagram_pick.yml
+        fields:
+          - name: posts
+            label: ホームに出す投稿のURL（3件まで）
+            label_singular: 投稿のURL
+            widget: list
+            field: { name: url, label: URL, widget: string }
+            hint: "投稿の「…」→「リンクをコピー」で取れるURL。自動取得を設定すると、そちらの最新3件が優先されます"
       - name: club
         label: 研究会の情報
         file: _data/club.yml

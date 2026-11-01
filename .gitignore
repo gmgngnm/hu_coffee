@@ -4,5 +4,3 @@ _site/
 vendor/
 Gemfile.lock
 .DS_Store
-# Actions がビルドのたびに取ってくるので、リポジトリには入れない
-assets/img/instagram/

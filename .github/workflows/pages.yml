@@ -38,9 +38,7 @@ jobs:
         env:
           IG_TOKEN: ${{ secrets.IG_TOKEN }}
           IG_NEW_TOKEN_FILE: ${{ runner.temp }}/ig_token
-        run: |
-          pip install --quiet pillow
-          python scripts/fetch_instagram.py
+        run: python scripts/fetch_instagram.py
 
       # トークンの期限（60日）を延ばした値を Secret に書き戻す。
       # GH_PAT（Secrets を書き換えられるトークン）を登録したときだけ動く

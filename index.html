@@ -31,46 +31,61 @@ nav: home
   </div>
 </section>
 
+{%- comment -%}
+  Instagram の最新3件。Actions が取ってきた投稿（_data/instagram.json）があればそれを、
+  まだ無ければ管理画面で選んだ投稿（_data/instagram_pick.yml）を、公式の埋め込みで出す。
+{%- endcomment -%}
+{%- assign ig_urls = "" | split: "" -%}
+{%- for g in ig limit: 3 -%}{%- assign ig_urls = ig_urls | push: g.permalink -%}{%- endfor -%}
+{%- if ig_urls.size == 0 -%}
+  {%- for u in site.data.instagram_pick.posts limit: 3 -%}{%- if u != "" -%}{%- assign ig_urls = ig_urls | push: u -%}{%- endif -%}{%- endfor -%}
+{%- endif -%}
 {%- assign total = site.posts | size -%}
-{%- if total > 0 %}
-<section class="wrap home-blog" aria-labelledby="home-blog-head">
-  <div class="sec-head">
-    <h2 id="home-blog-head">BLOG</h2>
-    <a class="more" href="{{ '/blog/' | relative_url }}">すべての記事 →</a>
-  </div>
-  <ol class="entries entries--list entries--wide">
-    {%- for post in site.posts limit: 3 -%}
-      {%- assign no = total | minus: forloop.index0 -%}
-      {% include post-card.html post=post no=no %}
-    {%- endfor -%}
-  </ol>
-</section>
-{%- endif %}
 
-{%- if ig and ig.size > 0 %}
-<section class="wrap home-ig">
-  <div class="sec-head">
-    <h2>Instagram の最新の投稿</h2>
-    <a class="more" href="https://www.instagram.com/{{ site.instagram }}/" target="_blank" rel="noopener noreferrer">@{{ site.instagram }} をもっと見る →</a>
-  </div>
-  <ul class="ig">
-    {%- for g in ig limit: 3 -%}
-    <li class="ig__item">
-      <a href="{{ g.permalink }}" target="_blank" rel="noopener noreferrer">
-        <img src="{{ g.image | relative_url }}" alt="{{ g.caption | default: 'Instagram の投稿' | escape }}" loading="lazy" width="320" height="320">
-        {% if g.video %}<span class="ig__video" aria-label="動画">▶</span>{% endif %}
-        {% if g.timestamp %}<time datetime="{{ g.timestamp }}">{{ g.timestamp | date: "%Y.%m.%d" }}</time>{% endif %}
-      </a>
-    </li>
-    {%- endfor -%}
-  </ul>
-</section>
-{%- endif %}
+<div class="wrap home-lower">
+  {%- if total > 0 %}
+  <section class="home-blog" aria-labelledby="home-blog-head">
+    <div class="sec-head">
+      <h2 id="home-blog-head">活動ブログ</h2>
+      <a class="more" href="{{ '/blog/' | relative_url }}">すべての記事 →</a>
+    </div>
+    <ol class="entries entries--list entries--wide">
+      {%- for post in site.posts limit: 3 -%}
+        {%- assign no = total | minus: forloop.index0 -%}
+        {% include post-card.html post=post no=no %}
+      {%- endfor -%}
+    </ol>
+  </section>
+  {%- endif %}
 
-<section class="wrap home-visit">
-  <div class="note-box">
-    <h2>部室・出店でも飲めます</h2>
-    <p>学祭や学内イベントで出店するほか、部室で試飲会をひらくことがあります。日程は Instagram でお知らせしています。</p>
-    <a class="btn btn--ghost" href="https://www.instagram.com/{{ site.instagram }}/" target="_blank" rel="noopener noreferrer">Instagram を見る</a>
-  </div>
-</section>
+  <aside class="home-ig" aria-labelledby="home-ig-head">
+    <div class="sec-head">
+      <h2 id="home-ig-head">Instagram</h2>
+      <a class="more" href="https://www.instagram.com/{{ site.instagram }}/" target="_blank" rel="noopener noreferrer">@{{ site.instagram }} →</a>
+    </div>
+    {%- if ig_urls.size > 0 %}
+    <div class="ig-embeds">
+      {%- for u in ig_urls %}
+      <blockquote class="instagram-media" data-instgrm-permalink="{{ u | split: '?' | first }}?utm_source=ig_embed" data-instgrm-version="14">
+        <a href="{{ u | split: '?' | first }}" target="_blank" rel="noopener noreferrer">Instagram でこの投稿を見る</a>
+      </blockquote>
+      {%- endfor %}
+    </div>
+    <script async src="https://www.instagram.com/embed.js"></script>
+    {%- else %}
+    <a class="ig-card" href="https://www.instagram.com/{{ site.instagram }}/" target="_blank" rel="noopener noreferrer">
+      <img src="{{ '/assets/img/icon-192.png' | relative_url }}" alt="" width="96" height="96">
+      <span class="ig-card__name">@{{ site.instagram }}</span>
+      <span class="ig-card__note">最新の投稿は Instagram でご覧ください</span>
+    </a>
+    {%- endif %}
+  </aside>
+
+  <section class="home-visit">
+    <div class="note-box">
+      <h2>部室・出店でも飲めます</h2>
+      <p>学祭や学内イベントで出店するほか、部室で試飲会をひらくことがあります。日程は Instagram でお知らせしています。</p>
+      <a class="btn btn--ghost" href="https://www.instagram.com/{{ site.instagram }}/" target="_blank" rel="noopener noreferrer">Instagram を見る</a>
+    </div>
+  </section>
+</div>

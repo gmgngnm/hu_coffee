@@ -3,10 +3,13 @@
 {%- comment -%}
   GitHub Pages は HTTP ヘッダーを設定できないので、CSP は meta で出す。
   GA と Formspree を使うときだけ、その接続先を許可に加える。
+  ホームは Instagram の公式埋め込み（embed.js と iframe）を使うので、その分だけ広げる。
+  embed.js は埋め込みの大きさを style 属性で書き換えるため、ホームに限って style の inline も許す。
 {%- endcomment -%}
-{%- capture csp_script -%}'self'{% if site.google_analytics != "" %} https://www.googletagmanager.com{% endif %}{%- endcapture -%}
+{%- assign ig_embed = false -%}{%- if page.nav == "home" -%}{%- assign ig_embed = true -%}{%- endif -%}
+{%- capture csp_script -%}'self'{% if site.google_analytics != "" %} https://www.googletagmanager.com{% endif %}{% if ig_embed %} https://www.instagram.com{% endif %}{%- endcapture -%}
 {%- capture csp_connect -%}'self'{% if site.google_analytics != "" %} https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com{% endif %} https://formspree.io{%- endcapture -%}
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src {{ csp_script }}; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:{% if site.google_analytics != "" %} https://*.google-analytics.com https://*.googletagmanager.com{% endif %}; connect-src {{ csp_connect }}; form-action https://formspree.io; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src {{ csp_script }}; style-src 'self'{% if ig_embed %} 'unsafe-inline'{% endif %} https://fonts.googleapis.com;{% if ig_embed %} frame-src https://www.instagram.com;{% endif %} font-src https://fonts.gstatic.com; img-src 'self' data:{% if site.google_analytics != "" %} https://*.google-analytics.com https://*.googletagmanager.com{% endif %}; connect-src {{ csp_connect }}; form-action https://formspree.io; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="theme-color" content="#0d5a2c">
 <link rel="icon" href="{{ '/assets/img/favicon-32.png' | relative_url }}" sizes="32x32" type="image/png">

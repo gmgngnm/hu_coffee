@@ -1,0 +1,4 @@
+# ホームの Instagram 欄に出す投稿（3件まで）。管理画面の「サイトの情報 → Instagram の表示」からも編集できる。
+# 自動取得（README の「Instagram の最新投稿を表示する」）を設定すると、そちらの最新3件が優先される。
+# 投稿の「…」→「リンクをコピー」で取れる URL を貼る。例: https://www.instagram.com/p/XXXXXXXX/
+posts: []
