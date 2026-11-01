@@ -39,6 +39,7 @@ products:
 
   - name: 珈琲の芳香剤
     icon: aroma
+    image: /assets/img/products/aroma.jpg
     desc: ピッキング（欠点豆の選り分け）で外した豆を、捨てずに香りを楽しむ芳香剤にしました。飲用ではありません。
     price:
     options: []
