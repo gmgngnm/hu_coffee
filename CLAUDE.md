@@ -3,6 +3,9 @@
 GitHub Actions（`.github/workflows/pages.yml`）で `actions/jekyll-build-pages` を使って組み立て、Pages に出す。
 ホームの Instagram 欄は連携していない。`_data/instagram_cards.yml` の上から2件を、
 Instagram の埋め込み風の枠1つにまとめて出す（アカウントの持ち主が別なので、API 連携は見送った）。
+ホーム下部の出店予定は、Actions が Secret `GCAL_ICS_URL`（Google カレンダーの iCal 非公開 URL）を
+`scripts/fetch_calendar.py` で読み、`_data/calendar.json` に書く（3時間ごとに再ビルド）。繰り返し予定は載せない。
+終わった予定は `main.js` が `data-end` を見て隠す。`_data/calendar.json` は空のままコミットする（見本の予定を入れない）。
 使えるプラグインは GitHub Pages が許すもの（jekyll-feed / seo-tag / sitemap）だけ。
 
 管理画面は Decap CMS（`admin/`）。ログインは `cms-auth/worker.js`（Cloudflare Worker）が中継する。

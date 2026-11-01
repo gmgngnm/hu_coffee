@@ -93,3 +93,31 @@ nav: home
     </div>
   </section>
 </div>
+
+{%- comment -%}
+  出店予定。Google カレンダーの予定を Actions が _data/calendar.json に取ってくる（scripts/fetch_calendar.py）。
+  終わった予定は、次に組み立て直すまでのあいだ main.js が隠す。
+{%- endcomment -%}
+{%- assign events = site.data.calendar -%}
+<section class="wrap home-events" aria-labelledby="home-events-head">
+  <div class="sec-head">
+    <h2 id="home-events-head">出店予定</h2>
+    {%- if site.calendar_url != "" %}
+    <a class="more" href="{{ site.calendar_url }}" target="_blank" rel="noopener noreferrer">カレンダーで見る →</a>
+    {%- endif %}
+  </div>
+  <ol class="events"{% if events.size == 0 %} hidden{% endif %}>
+    {%- for e in events %}
+    <li class="event" data-end="{{ e.end }}">
+      <p class="event__date"><span class="event__month">{{ e.month }}</span><span class="event__day">{{ e.day }}</span><span class="event__wday">（{{ e.wday }}）</span></p>
+      <div class="event__body">
+        <h3 class="event__title">{{ e.title }}</h3>
+        <p class="event__meta">{% if e.until != "" %}{{ e.until }}　{% endif %}{{ e.time }}{% if e.location != "" %}　<span class="event__place">{{ e.location }}</span>{% endif %}</p>
+        {%- if e.note != "" %}<p class="event__note">{{ e.note }}</p>{% endif %}
+      </div>
+      <a class="event__add" href="{{ e.add_url }}" target="_blank" rel="noopener noreferrer">Google カレンダーに追加</a>
+    </li>
+    {%- endfor %}
+  </ol>
+  <p class="events__empty"{% if events.size > 0 %} hidden{% endif %}>いまのところ決まっている出店はありません。決まり次第、ここと Instagram でお知らせします。</p>
+</section>

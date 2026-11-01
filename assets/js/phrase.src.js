@@ -9,6 +9,7 @@ const SEL = [
   '.note-box h2', '.note-box p', '.timeline span', '.datasheet dd',
   '.form__notice', '.field > span', '.check span', '.ig-feed__cap',
   '.site-foot__sub', '.site-foot__copy', '.todo-note',
+  '.event__title', '.event__note', '.events__empty',
 ].join(',');
 const run = () => document.querySelectorAll(SEL).forEach((el) => {
   if (el.dataset.phrased) return;

@@ -20,6 +20,8 @@ formspree_contact: ""
 # オンラインショップ（BASE や STORES など）のトップページのURL。商品ごとの購入ページが
 # 未設定のとき、ここへ案内する。空欄ならショップは「準備中」と表示する
 shop_url: ""
+# 出店予定に使っている Google カレンダーの公開ページ（「カレンダーで見る」のリンク先）。空なら出さない
+calendar_url: ""
 # 予備の連絡先メール（フォーム未設定のときに案内として表示）
 contact_email: ""
 
@@ -49,3 +51,4 @@ exclude:
   - vendor
   - cms-auth
   - assets/js/phrase.src.js
+  - scripts

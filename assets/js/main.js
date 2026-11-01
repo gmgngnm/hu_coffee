@@ -3,6 +3,20 @@
   var cur = document.querySelector(".tab.is-current");
   if (cur && cur.scrollIntoView) cur.scrollIntoView({ block: "nearest", inline: "center" });
 
+  // 出店予定のうち、もう終わったものを隠す（サイトは数時間おきにしか組み立て直さないため）。
+  var events = document.querySelectorAll(".event[data-end]");
+  if (events.length) {
+    var now = Date.now(), left = 0;
+    events.forEach(function (li) {
+      if (Date.parse(li.dataset.end) <= now) li.hidden = true; else left++;
+    });
+    if (!left) {
+      var list = document.querySelector(".events"), empty = document.querySelector(".events__empty");
+      if (list) list.hidden = true;
+      if (empty) empty.hidden = false;
+    }
+  }
+
   // Formspree へはページ遷移せずに送る。JS が無い環境では普通の POST で送られる。
   document.querySelectorAll("form[data-ajax]").forEach(function (form) {
     form.addEventListener("submit", function (e) {

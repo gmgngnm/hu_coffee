@@ -19,6 +19,7 @@ GitHub Pages（無料・常時HTTPS）で公開する静的サイトです。ブ
 | 研究会の情報（活動日など） | `_data/club.yml` |
 | 管理画面 | `admin/`（設定は `admin/config.yml`） |
 | 管理画面のログイン中継 | `cms-auth/`（Cloudflare に置く。サイトには含まれない） |
+| 出店予定（Google カレンダー） | `scripts/fetch_calendar.py` ／ `.github/workflows/pages.yml` ／ 結果は `_data/calendar.json` |
 | Instagram 欄の投稿 | `_data/instagram_cards.yml` ／ 画像は `assets/img/instagram/` |
 | ロゴ・アイコン | `assets/img/`（ヘッダーは `logo.png` と手書きの `hu_coffee-sign.png`、`favicon-32.png` などがアイコン） |
 | デザイン案 B・C | `proposals/` |
@@ -80,6 +81,21 @@ Instagram とは連携していないので、投稿を入れ替えるときは�
 1. Instagram で載せたい投稿を開き、画像を保存する（またはスクリーンショットから切り出す）
 2. 管理画面の「サイトの情報 → Instagram の表示」で、新しい投稿を一番上に追加する（投稿日・画像・本文の冒頭、分かれば投稿の URL）
 3. 上から2件が表示される。古いものは消してよい
+
+### 出店予定（Google カレンダーと連携）
+
+ホームの一番下の「出店予定」は、研究会の Google カレンダーから自動で作られます。カレンダーに予定を入れれば、3時間以内にサイトに出ます（急ぐときは Actions タブの「サイトを公開」→「Run workflow」）。
+
+1. Google カレンダーで、出店用のカレンダーを1つ作る（例：「珈琲研究会 出店予定」）。個人の予定と混ざらないよう、専用にするのがおすすめ
+2. そのカレンダーの「設定と共有」→「カレンダーの統合」にある **「iCal 形式の非公開アドレス」** をコピー
+3. GitHub のリポジトリ → Settings → Secrets and variables → Actions → New repository secret で、名前 `GCAL_ICS_URL`、値に 2 の URL を貼る
+4. （任意）カレンダーを一般公開にしているなら、「カレンダーの統合」の「公開 URL」を `_config.yml` の `calendar_url` に入れると「カレンダーで見る」リンクが出る
+
+予定の入れ方：
+- タイトル＝出店名、場所＝会場、説明の1行目＝ひとこと（サイトに出る）
+- 毎週の例会のような**繰り返しの予定は載りません**（出店は単発の予定として入れる）
+- 終わった予定は自動で消え、予定が無いときは「いまのところ決まっている出店はありません」と出ます
+- 非公開アドレスを知っている人は誰でも予定を読めるので、Secret 以外には貼らないこと。漏れたら Google カレンダーの同じ画面で「リセット」する
 
 ## 3. 日々の更新
 

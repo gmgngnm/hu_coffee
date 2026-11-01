@@ -1,11 +1,14 @@
 # サイトを組み立てて GitHub Pages に公開する。
 #   ・main に変更が入ったとき（管理画面からの更新も含む）
+#   ・3時間ごと（Google カレンダーの出店予定を取り直すため）
 #   ・Actions の画面から手動で
 name: サイトを公開
 
 on:
   push:
     branches: [main]
+  schedule:
+    - cron: "17 */3 * * *"
   workflow_dispatch:
 
 permissions:
@@ -23,6 +26,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      # iCal の URL は Secret（GCAL_ICS_URL）にだけ置く。未設定なら何もしない
+      - name: Google カレンダーの出店予定を取得
+        env:
+          GCAL_ICS_URL: ${{ secrets.GCAL_ICS_URL }}
+        run: python3 scripts/fetch_calendar.py
 
       - uses: actions/configure-pages@v5
 
