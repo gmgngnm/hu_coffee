@@ -18,5 +18,4 @@
         <p class="event__meta">{% if include.until != "" %}{{ include.until }}　{% endif %}{{ ev_time }}{% if include.location != "" and include.location %}　<span class="event__place">{{ include.location }}</span>{% endif %}</p>
         {%- if include.note != "" and include.note %}<p class="event__note">{{ include.note }}</p>{% endif %}
       </div>
-      <a class="event__add" href="{{ include.add_url }}" target="_blank" rel="noopener noreferrer">Google カレンダーに追加</a>
     </li>

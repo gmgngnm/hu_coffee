@@ -122,7 +122,7 @@ nav: home
   {%- comment -%} Google カレンダーの予定と手入力の予定を並べる。日付順への並べ替えは main.js が行う {%- endcomment -%}
   <ol class="events">
     {%- for e in events %}
-    {% include event-item.html start=e.start end=e.end month=e.month day=e.day wday=e.wday until=e.until time=e.time title=e.title location=e.location note=e.note add_url=e.add_url %}
+    {% include event-item.html start=e.start end=e.end month=e.month day=e.day wday=e.wday until=e.until time=e.time title=e.title location=e.location note=e.note %}
     {%- endfor %}
     {%- assign wdays = "日,月,火,水,木,金,土" | split: "," -%}
     {%- for m in manual %}
@@ -130,8 +130,7 @@ nav: home
       {%- assign d_next = m.date | date: "%s" | plus: 86400 | date: "%Y-%m-%d" -%}
       {%- assign wi = m.date | date: "%w" | plus: 0 -%}
       {%- assign wd = wdays[wi] -%}
-      {%- capture add_url -%}https://calendar.google.com/calendar/render?action=TEMPLATE&text={{ m.title | url_encode }}&dates={{ d | remove: "-" }}/{{ d_next | remove: "-" }}&ctz=Asia/Tokyo{% if m.location != "" %}&location={{ m.location | url_encode }}{% endif %}{% if m.note != "" %}&details={{ m.note | url_encode }}{% endif %}{%- endcapture -%}
-    {% include event-item.html start=d end=d_next month=m.date day=m.date wday=wd until="" time=m.time title=m.title location=m.location note=m.note add_url=add_url manual="1" %}
+    {% include event-item.html start=d end=d_next month=m.date day=m.date wday=wd until="" time=m.time title=m.title location=m.location note=m.note manual="1" %}
     {%- endfor %}
   </ol>
   </div>
