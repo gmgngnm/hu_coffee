@@ -75,7 +75,7 @@ h1, h2, h3 { font-family: var(--f-head); font-weight: 400; line-height: 1.45; le
 .brand:hover .brand__logo { transform: rotate(0deg) scale(1.03); }
 /* 手書きの hu_coffee。線の形だけの画像をマスクにして、表紙の文字色で塗る（暗い配色でもそのまま読める） */
 .brand__sign {
-  display: block; height: 101px; aspect-ratio: 2346 / 566; background: var(--cover-ink);
+  display: block; height: 87px; aspect-ratio: 2346 / 566; background: var(--cover-ink);
   -webkit-mask: url("../img/hu_coffee-sign.png") center / contain no-repeat;
           mask: url("../img/hu_coffee-sign.png") center / contain no-repeat;
 }
@@ -478,9 +478,9 @@ input:focus, textarea:focus, select:focus { outline: none; border-bottom-color: 
   body { font-size: 15.5px; }
   .site-head { padding-top: 16px; }
   .brand { max-width: 100%; }
-  /* 手書きの hu_coffee は 1.75 倍（224px）。入りきらない幅の画面では、アイコンと重ならない大きさまで縮める
+  /* 手書きの hu_coffee は 1.5 倍（192px）。入りきらない幅の画面では、アイコンと重ならない大きさまで縮める
      （157px＝イラスト67＋すき間8＋SNS 74＋すき間8） */
-  .brand__sign { flex: 0 1 auto; min-width: 0; height: auto; width: min(224px, calc(100vw - 2 * var(--gutter) - 157px)); }
+  .brand__sign { flex: 0 1 auto; min-width: 0; height: auto; width: min(192px, calc(100vw - 2 * var(--gutter) - 157px)); }
   .brand__logo { height: 27px; }
   .site-head__inner { padding-bottom: 9px; }
   .head-sns { gap: 6px; padding-top: 2px; }
