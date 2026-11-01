@@ -12,7 +12,8 @@ GitHub Actions（`.github/workflows/pages.yml`）で `actions/jekyll-build-pages
 - 画面の文言・コミットは日本語。部員（Web初心者）が読むので README は平易に
 - CSP を meta で出している。インライン script・style 属性は書かない
 - 配色は明るい麻袋の地に、エルムの緑と珈琲の赤。ダークモードは利用者の希望で持たない
-- 文字はすべてゴシック（Zen Kaku Gothic New）。タブだけ手書き風の英字（Nothing You Could Do）
+- 文字は Noto Sans JP（見出しも400の細め、等幅フォントや大文字の字間広めラベルは使わない）。
+  タブは手書き風の英字（Nothing You Could Do）、ホームの挨拶は手書き風（Zen Kurenaido）
 - 見た目を変えたら PC／スマホ幅（390px と 320px）で撮って確かめる。横にはみ出していないかも測る
 - 手元ビルド: `JEKYLL_NO_BUNDLER_REQUIRE=true BUNDLE_GEMFILE=/nonexistent jekyll build`
   （Gemfile の github-pages gem を入れずに済ませるため）
