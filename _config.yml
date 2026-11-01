@@ -3,7 +3,7 @@
 # ─────────────────────────────────────────────
 title: 北大珈琲研究会
 title_en: Hokkaido University Coffee Society
-description: 北海道大学珈琲研究会です。大学生にスペシャルティコーヒーを広めるサークル。自家焙煎豆の頒布とブログ。
+description: 北海道大学珈琲研究会です。大学生にスペシャルティコーヒーを広めるサークル。手づくりの道具と自家焙煎豆の販売、例会のブログ。
 lang: ja
 url: "https://gmgngnm.github.io"   # 独自ドメインにしたらここを書き換える
 baseurl: "/hu_coffee"              # 独自ドメインにしたら "" にする
@@ -17,7 +17,9 @@ image: /assets/img/og.png         # SNS で共有したときに出る画像
 google_analytics: ""
 # Formspree のフォームID（https://formspree.io/f/xxxxabcd の xxxxabcd 部分）
 formspree_contact: ""
-formspree_order: ""
+# オンラインショップ（BASE や STORES など）のトップページのURL。商品ごとの購入ページが
+# 未設定のとき、ここへ案内する。空欄ならショップは「準備中」と表示する
+shop_url: ""
 # 予備の連絡先メール（フォーム未設定のときに案内として表示）
 contact_email: ""
 

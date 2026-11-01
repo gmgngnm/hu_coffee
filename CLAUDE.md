@@ -6,6 +6,9 @@ GitHub Actions（`.github/workflows/pages.yml`）で `actions/jekyll-build-pages
 使えるプラグインは GitHub Pages が許すもの（jekyll-feed / seo-tag / sitemap）だけ。
 
 管理画面は Decap CMS（`admin/`）。ログインは `cms-auth/worker.js`（Cloudflare Worker）が中継する。
+SHOP（`shop.html`）は商品を `_data/products.yml`、焙煎豆を `_data/beans.yml` から出す。決済は外部（BASE/STORES）で、
+このサイトは購入ページへのリンクだけを持つ（取り置きフォームは廃止）。`/beans/` は `/shop/` への転送だけ残している。
+各ページの頭は `.page-hero`（左に手書き風の見出し、右に貼った写真1枚）でホームとそろえる。
 管理画面で編集するデータは Decap が扱える形にしてある（`_data/beans.yml` は `beans:` の下にリスト、
 価格は `{size, price}` のリスト、焙煎記録は `{label, value}` のリスト）。形を変えるなら `admin/config.yml` も直す。
 

@@ -5,13 +5,18 @@ nav: about
 description: 北大珈琲研究会の活動内容、一年の流れ、入会案内。
 ---
 <div class="wrap">
-<header class="page-head">
-  <p class="label">04 ／ ABOUT US</p>
-  <h1>私たちについて</h1>
-  <p class="lead">コーヒーを「好き」で終わらせず、なぜその味になるのかを確かめたい。そんな学生が学部も学年もばらばらに集まっています。</p>
+<header class="page-hero">
+  <div class="page-hero__text">
+    <p class="label">WHO WE ARE ／ ABOUT</p>
+    <h1 class="page-title">私たちについて</h1>
+    <p class="lead">スペシャルティコーヒーを、大学生にもっと身近に。<br>学部も学年もばらばらのメンバーで、毎週コーヒーを淹れています。</p>
+  </div>
+  <figure class="snap snap--solo">
+    <img src="{{ '/assets/img/uploads/2026-10-30-room.jpg' | relative_url }}" width="698" height="370" alt="グループに分かれてドリップしている例会の様子">
+  </figure>
 </header>
 
-<div class="about-grid">
+<div class="about-grid page-sec">
 <section class="prose" markdown="1">
 
 ## 活動の柱
@@ -26,12 +31,12 @@ description: 北大珈琲研究会の活動内容、一年の流れ、入会案�
 同じ豆でも、挽き目・湯温・注ぎ方で味は大きく変わります。条件を一つずつ変えて飲み比べるのが、いちばん盛り上がる時間です。
 
 ### 届ける
-学祭や学内イベントでの出店、豆の頒布をしています。飲んだ人の感想が、次の焙煎のいちばんの材料になります。
+学祭や学内イベントでの出店や、手づくりの道具・焙煎豆の販売をしています。飲んだ人の感想が、次の焙煎のいちばんの材料になります。
 
 </section>
 
 <aside class="datasheet" aria-label="研究会の概要">
-  <p class="datasheet__head">DATA SHEET</p>
+  <p class="datasheet__head">研究会の概要</p>
   <dl>
     <div><dt>名称</dt><dd>北大珈琲研究会</dd></div>
     <div><dt>拠点</dt><dd>北海道大学 札幌キャンパス</dd></div>
@@ -46,7 +51,7 @@ description: 北大珈琲研究会の活動内容、一年の流れ、入会案�
 </div>
 
 <section class="year-flow">
-  <div class="sec-head"><h2><span class="sec-head__no">§</span>一年の流れ</h2></div>
+  <div class="sec-head"><h2>一年の流れ</h2></div>
   <ol class="timeline">
     <li><b>4–5月</b><span>新歓。試飲会と、はじめての焙煎体験。</span></li>
     <li><b>6月</b><span>北大祭に出店。</span></li>

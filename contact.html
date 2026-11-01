@@ -4,12 +4,18 @@ title: お問い合わせ
 nav: contact
 description: 北大珈琲研究会へのお問い合わせ。入会、出店・コラボのご依頼、取材など。
 ---
-<div class="wrap narrow">
-  <header class="page-head">
-    <p class="label">05 ／ CONTACT</p>
-    <h1>お問い合わせ</h1>
-    <p class="lead">入会のこと、出店やコラボのご依頼、取材など、お気軽にどうぞ。部員が交代で返信するため、数日かかることがあります。</p>
+<div class="wrap">
+  <header class="page-hero">
+    <div class="page-hero__text">
+      <p class="label">GET IN TOUCH ／ CONTACT</p>
+      <h1 class="page-title">お問い合わせ</h1>
+      <p class="lead">入会のこと、出店やコラボのご依頼、取材など、お気軽にどうぞ。<br>部員が交代で返信するため、数日かかることがあります。</p>
+    </div>
+    <figure class="snap snap--solo">
+      <img src="{{ '/assets/img/uploads/2026-10-23-brewing.jpg' | relative_url }}" width="698" height="510" alt="例会でドリップしている部員の手元">
+    </figure>
   </header>
+  <section class="page-sec narrow">
   {%- assign live = site.formspree_contact | size -%}
   <form class="form" data-ajax {% if live > 0 %}action="https://formspree.io/f/{{ site.formspree_contact }}" method="POST"{% endif %}>
     {% unless live > 0 %}<p class="form__notice" role="status">ただいまフォームの準備中です。Instagram の DM（@{{ site.instagram }}）でご連絡ください。</p>{% endunless %}
@@ -18,7 +24,7 @@ description: 北大珈琲研究会へのお問い合わせ。入会、出店・�
     <fieldset class="field">
       <legend>ご用件 <span class="req">必須</span></legend>
       <div class="chips">
-        {%- assign kinds = "入会・見学,焙煎豆について,出店・コラボのご依頼,取材,その他" | split: "," -%}
+        {%- assign kinds = "入会・見学,商品について,出店・コラボのご依頼,取材,その他" | split: "," -%}
         {%- for k in kinds -%}<label class="chip"><input type="radio" name="用件" value="{{ k }}" required{% if forloop.first %} checked{% endif %}><span>{{ k }}</span></label>{%- endfor -%}
       </div>
     </fieldset>
@@ -32,4 +38,5 @@ description: 北大珈琲研究会へのお問い合わせ。入会、出店・�
     <button class="btn" type="submit"{% unless live > 0 %} disabled{% endunless %}>送信する</button>
     <p class="form__result" role="status" aria-live="polite"></p>
   </form>
+  </section>
 </div>

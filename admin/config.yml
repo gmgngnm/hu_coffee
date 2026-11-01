@@ -59,8 +59,40 @@ collections:
     label: サイトの情報
     editor: { preview: false }
     files:
+      - name: products
+        label: 商品（SHOP）
+        file: _data/products.yml
+        fields:
+          - name: products
+            label: 商品の一覧
+            label_singular: 商品
+            widget: list
+            summary: "{{fields.name}}（{{fields.status}}）"
+            fields:
+              - { name: name, label: 商品名, widget: string }
+              - name: status
+                label: 状態
+                widget: select
+                options:
+                  - { label: 販売中, value: available }
+                  - { label: 準備中, value: soon }
+                  - { label: 売り切れ, value: soldout }
+              - name: icon
+                label: 絵
+                widget: select
+                options:
+                  - { label: ドリッパー, value: dripper }
+                  - { label: コーヒーパック, value: dripbag }
+                  - { label: 豆, value: beans }
+                  - { label: 芳香剤, value: aroma }
+                  - { label: スプーン, value: spoon }
+                  - { label: カップ, value: cup }
+              - { name: desc, label: 説明, widget: text }
+              - { name: price, label: 価格（円・税込）, widget: number, value_type: int, min: 0, required: false, hint: "未定なら空欄（「価格は近日公開」と出ます）" }
+              - { name: options, label: 選べる種類, widget: list, required: false, hint: "カンマ区切り（例：豆のまま, 挽き豆）" }
+              - { name: buy_url, label: 購入ページのURL, widget: string, required: false, hint: "BASE や STORES の商品ページ。空欄ならショップのトップへ案内します" }
       - name: beans
-        label: 焙煎豆
+        label: 焙煎豆のラインナップ
         file: _data/beans.yml
         fields:
           - name: beans
@@ -74,7 +106,7 @@ collections:
                 label: 状態
                 widget: select
                 options:
-                  - { label: 頒布中, value: available }
+                  - { label: 販売中, value: available }
                   - { label: 次回焙煎, value: soon }
                   - { label: 売り切れ, value: soldout }
               - { name: origin, label: 産地, widget: string }

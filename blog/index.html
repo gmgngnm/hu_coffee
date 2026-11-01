@@ -2,25 +2,31 @@
 layout: default
 title: BLOG
 nav: blog
-description: 北大珈琲研究会のブログ。焙煎会、抽出の比較、出店の様子など。
+description: 北大珈琲研究会のブログ。例会の報告、抽出の検証、出店の様子など。
 ---
 <div class="wrap">
-  <header class="page-head">
-    <p class="label">03 ／ BLOG</p>
-    <h1>BLOG</h1>
-    <p class="lead">焙煎会のメモ、抽出の比較、出店の報告。うまくいかなかった回も残しています。</p>
+  <header class="page-hero">
+    <div class="page-hero__text">
+      <p class="label">MEETING REPORTS ／ BLOG</p>
+      <h1 class="page-title">BLOG</h1>
+      <p class="lead">毎週の例会で淹れたもの、比べたこと、気づいたことを書いています。</p>
+    </div>
+    <figure class="snap snap--solo">
+      <img src="{{ '/assets/img/uploads/2026-10-07-cupping.jpg' | relative_url }}" width="698" height="685" alt="カッピングの準備をした例会の机">
+    </figure>
   </header>
   {%- assign total = site.posts | size -%}
   {%- for post in site.posts -%}
     {%- assign y = post.date | date: "%Y" -%}
     {%- if y != prev_y -%}
-      {%- unless forloop.first %}</ol>{% endunless %}
-      <h2 class="year">{{ y }}</h2>
-      <ol class="entries entries--list">
+      {%- unless forloop.first %}</ol></section>{% endunless %}
+      <section class="page-sec">
+      <div class="sec-head"><h2>{{ y }}</h2></div>
+      <ol class="entries entries--list entries--wide">
       {%- assign prev_y = y -%}
     {%- endif -%}
     {%- assign no = total | minus: forloop.index0 -%}
     {% include post-card.html post=post no=no %}
-    {%- if forloop.last %}</ol>{% endif -%}
+    {%- if forloop.last %}</ol></section>{% endif -%}
   {%- endfor -%}
 </div>

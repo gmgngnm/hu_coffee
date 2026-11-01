@@ -10,7 +10,7 @@
   <nav class="tabs" aria-label="ページ切り替え">
     <ul class="tabs__list">
       <li><a class="tab{% if here == 'home' %} is-current{% endif %}" href="{{ '/' | relative_url }}"{% if here == 'home' %} aria-current="page"{% endif %}><span class="tab__label" lang="en">home</span></a></li>
-      <li><a class="tab{% if here == 'beans' %} is-current{% endif %}" href="{{ '/beans/' | relative_url }}"{% if here == 'beans' %} aria-current="page"{% endif %}><span class="tab__label" lang="en">beans</span></a></li>
+      <li><a class="tab{% if here == 'shop' %} is-current{% endif %}" href="{{ '/shop/' | relative_url }}"{% if here == 'shop' %} aria-current="page"{% endif %}><span class="tab__label" lang="en">shop</span></a></li>
       <li><a class="tab{% if here == 'blog' %} is-current{% endif %}" href="{{ '/blog/' | relative_url }}"{% if here == 'blog' %} aria-current="page"{% endif %}><span class="tab__label" lang="en">blog</span></a></li>
       <li><a class="tab{% if here == 'about' %} is-current{% endif %}" href="{{ '/about/' | relative_url }}"{% if here == 'about' %} aria-current="page"{% endif %}><span class="tab__label" lang="en">about</span></a></li>
       <li><a class="tab{% if here == 'contact' %} is-current{% endif %}" href="{{ '/contact/' | relative_url }}"{% if here == 'contact' %} aria-current="page"{% endif %}><span class="tab__label" lang="en">contact</span></a></li>

@@ -1,0 +1,91 @@
+---
+layout: default
+title: SHOP
+nav: shop
+permalink: /shop/
+description: 北大珈琲研究会のオンラインショップ。自作のドリッパー、コーヒーパック、自家焙煎豆、珈琲の芳香剤、カッピングスプーン、カップ。
+---
+{%- assign shop_url = site.shop_url | default: "" -%}
+<div class="wrap">
+  <header class="page-hero">
+    <div class="page-hero__text">
+      <p class="label">OUR GOODS ／ SHOP</p>
+      <h1 class="page-title">SHOP</h1>
+      <p class="lead">部員が手づくりした道具や、自分たちで焙煎した豆を販売しています。<br>ふだんの一杯が、ちょっと楽しくなるものを選びました。</p>
+    </div>
+    <figure class="snap snap--solo">
+      <img src="{{ '/assets/img/uploads/2026-10-14-drip.jpg' | relative_url }}" width="698" height="810" alt="ドリッパーからサーバーにコーヒーが落ちているところ">
+    </figure>
+  </header>
+
+  <section class="page-sec">
+    <div class="sec-head"><h2>商品</h2></div>
+    <ul class="products">
+      {%- for p in site.data.products.products -%}
+      {%- assign url = p.buy_url | default: shop_url -%}
+      <li class="product product--{{ p.status }}">
+        <div class="product__pic">{% include product-icon.html icon=p.icon %}
+          {%- case p.status -%}
+            {%- when "soon" -%}<span class="product__badge">準備中</span>
+            {%- when "soldout" -%}<span class="product__badge product__badge--out">売り切れ</span>
+          {%- endcase -%}
+        </div>
+        <h3 class="product__name">{{ p.name }}</h3>
+        <p class="product__desc">{{ p.desc }}</p>
+        {%- if p.options.size > 0 %}
+        <ul class="product__opts">{% for o in p.options %}<li>{{ o }}</li>{% endfor %}</ul>
+        {%- endif %}
+        <div class="product__foot">
+          <span class="product__price">{% if p.price %}¥{{ p.price }}<small>（税込）</small>{% else %}価格は近日公開{% endif %}</span>
+          {%- if p.status == "available" and url != "" %}
+          <a class="btn btn--small" href="{{ url }}" target="_blank" rel="noopener noreferrer">購入する</a>
+          {%- elsif p.icon == "beans" %}
+          <a class="more" href="#beans">ラインナップ ↓</a>
+          {%- endif %}
+        </div>
+      </li>
+      {%- endfor -%}
+    </ul>
+  </section>
+
+  <section class="page-sec" id="beans">
+    <div class="sec-head"><h2>焙煎豆のラインナップ</h2></div>
+    <p class="sec-lead">豆のまま・挽き豆のどちらでもお選びいただけます。挽き豆は、ご購入時に淹れ方（ハンドドリップ、フレンチプレスなど）をお知らせください。</p>
+    <ul class="beans">
+      {%- for b in site.data.beans.beans -%}
+      <li class="bean bean--{{ b.status }}" id="{{ b.name | slugify }}">
+        <div class="bean__head">
+          <h3 class="bean__name">{{ b.name }}</h3>
+          {% include roast-level.html level=b.roast name=b.roast_name %}
+          {%- case b.status -%}
+            {%- when "soldout" -%}<span class="product__badge product__badge--out">売り切れ</span>
+            {%- when "soon" -%}<span class="product__badge">次回焙煎</span>
+          {%- endcase -%}
+        </div>
+        <p class="bean__notes">{{ b.notes | join: " ／ " }}</p>
+        <p class="bean__comment">{{ b.comment }}</p>
+        <dl class="bean__spec">
+          <div><dt>産地</dt><dd>{{ b.origin }}</dd></div>
+          <div><dt>精製</dt><dd>{{ b.process }}</dd></div>
+          {% if b.variety %}<div><dt>品種</dt><dd>{{ b.variety }}</dd></div>{% endif %}
+          {% if b.roasted_on %}<div><dt>焙煎日</dt><dd>{{ b.roasted_on | date: "%Y.%m.%d" }}</dd></div>{% endif %}
+        </dl>
+        <p class="bean__prices">{%- for pr in b.prices -%}<span>{{ pr.size }} <b>¥{{ pr.price }}</b></span>{%- endfor -%}</p>
+      </li>
+      {%- endfor -%}
+    </ul>
+  </section>
+
+  <section class="page-sec">
+    <div class="note-box">
+      <h2>ご購入について</h2>
+      {%- if shop_url != "" %}
+      <p>ご注文とお支払いは、オンラインショップで受け付けています。お届け方法や送料は、ショップの各商品ページをご覧ください。</p>
+      <p><a class="btn" href="{{ shop_url }}" target="_blank" rel="noopener noreferrer">オンラインショップへ</a></p>
+      {%- else %}
+      <p>オンラインショップは準備中です。開店のお知らせは Instagram で行います。学内イベントでの出店でもお求めいただけます。</p>
+      <p><a class="btn btn--ghost" href="https://www.instagram.com/{{ site.instagram }}/" target="_blank" rel="noopener noreferrer">Instagram を見る</a></p>
+      {%- endif %}
+    </div>
+  </section>
+</div>

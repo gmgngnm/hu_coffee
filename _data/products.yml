@@ -1,0 +1,58 @@
+# ─────────────────────────────────────────────
+# SHOP の商品。管理画面（/admin/）の「サイトの情報 → 商品」からも編集できる。
+#   icon:    絵の種類（dripper / dripbag / beans / aroma / spoon / cup）
+#   price:   価格（円）。未定なら空欄
+#   options: 選べる種類（例：豆のまま、挽き豆）。無ければ空のまま
+#   buy_url: その商品の購入ページ（BASE や STORES の商品URL）。
+#            空欄なら _config.yml の shop_url（ショップのトップ）へ案内する
+#   status:  available（販売中） / soon（準備中） / soldout（売り切れ）
+# ※ 説明文と価格は仮です。実際の内容に差し替えてください。
+# ─────────────────────────────────────────────
+products:
+  - name: 自作ドリッパー
+    icon: dripper
+    desc: 部員が設計からつくったドリッパー。湯の落ち方を試作で何度も確かめています。
+    price:
+    options: []
+    buy_url: ""
+    status: soon
+
+  - name: コーヒーパック
+    icon: dripbag
+    desc: カップにかけてお湯を注ぐだけ。研究会で焙煎した豆を使ったドリップバッグです。
+    price:
+    options: []
+    buy_url: ""
+    status: soon
+
+  - name: 焙煎豆
+    icon: beans
+    desc: 自家焙煎のスペシャルティコーヒー。いま扱っている豆は下の「焙煎豆のラインナップ」をご覧ください。
+    price:
+    options: [豆のまま, 挽き豆]
+    buy_url: ""
+    status: soon
+
+  - name: 珈琲の芳香剤
+    icon: aroma
+    desc: ピッキング（欠点豆の選り分け）で外した豆を、捨てずに香りを楽しむ芳香剤にしました。飲用ではありません。
+    price:
+    options: []
+    buy_url: ""
+    status: soon
+
+  - name: カッピングスプーン
+    icon: spoon
+    desc: 味を見比べるカッピングで使う、深めの専用スプーン。
+    price:
+    options: []
+    buy_url: ""
+    status: soon
+
+  - name: 珈琲用カップ
+    icon: cup
+    desc: 香りが立ちやすい形を選んだ、コーヒーのためのカップ。
+    price:
+    options: []
+    buy_url: ""
+    status: soon
