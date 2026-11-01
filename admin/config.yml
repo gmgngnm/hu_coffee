@@ -28,8 +28,8 @@ public_folder: /assets/img/uploads
 
 collections:
   - name: posts
-    label: 記録（ブログ）
-    label_singular: 記事
+    label: BLOG
+    label_singular: BLOGの記事
     folder: _posts
     create: true
     # 日本語のタイトルは URL にしにくいので、日付と時刻でファイル名を作る

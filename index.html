@@ -2,8 +2,10 @@
 layout: default
 nav: home
 ---
+{%- assign ig = site.data.instagram -%}
 <section class="hero">
-  <div class="wrap hero__inner">
+  <div class="wrap hero__grid">
+  <div class="hero__inner">
     <p class="label">WELCOME ／ 札幌キャンパス</p>
     <h1 class="hero__title">こんにちは。<br><span class="hero__name">北海道大学珈琲研究会です!!</span></h1>
     <div class="hero__body">
@@ -17,65 +19,36 @@ nav: home
       <a class="btn btn--ghost" href="{{ '/beans/' | relative_url }}">いま頒布中の豆</a>
     </p>
   </div>
-</section>
 
-<section class="wrap home-log">
-  <div class="sec-head">
-    <h2><span class="sec-head__no">§1</span>最近の記録</h2>
-    <a class="more" href="{{ '/blog/' | relative_url }}">すべての記録 →</a>
+  <aside class="hero__ig" aria-labelledby="ig-head">
+    <p class="label" id="ig-head">INSTAGRAM ／ 最新の投稿</p>
+    {%- if ig and ig.size > 0 %}
+    <ul class="ig">
+      {%- for g in ig limit: 3 -%}
+      <li class="ig__item">
+        <a href="{{ g.permalink }}" target="_blank" rel="noopener noreferrer">
+          <img src="{{ g.image | relative_url }}" alt="{{ g.caption | default: 'Instagram の投稿' | escape }}" loading="lazy" width="320" height="320">
+          {% if g.video %}<span class="ig__video" aria-label="動画">▶</span>{% endif %}
+          {% if g.timestamp %}<time datetime="{{ g.timestamp }}">{{ g.timestamp | date: "%Y.%m.%d" }}</time>{% endif %}
+        </a>
+      </li>
+      {%- endfor -%}
+    </ul>
+    {%- else %}
+    {%- comment -%} 取得の設定がまだ・失敗したときは、写真の代わりにアカウントへの入口を置く {%- endcomment -%}
+    <ul class="ig ig--empty">
+      <li class="ig__item">
+        <a href="https://www.instagram.com/{{ site.instagram }}/" target="_blank" rel="noopener noreferrer">
+          <img src="{{ '/assets/img/icon-512.png' | relative_url }}" alt="" width="320" height="320">
+          <span class="ig__note">最新の投稿は<br>Instagram で</span>
+        </a>
+      </li>
+    </ul>
+    {%- endif %}
+    <a class="more ig__more" href="https://www.instagram.com/{{ site.instagram }}/" target="_blank" rel="noopener noreferrer">@{{ site.instagram }} をもっと見る →</a>
+  </aside>
   </div>
-  {%- assign total = site.posts | size -%}
-  {%- if total > 0 -%}
-  <ol class="entries">
-    {%- for post in site.posts limit: 6 -%}
-      {%- assign no = total | minus: forloop.index0 -%}
-      {% include post-card.html post=post no=no %}
-    {%- endfor -%}
-  </ol>
-  {%- else -%}
-  <p class="empty">まだ記録がありません。</p>
-  {%- endif -%}
 </section>
-
-<section class="wrap home-beans">
-  <div class="sec-head">
-    <h2><span class="sec-head__no">§2</span>頒布中の豆</h2>
-    <a class="more" href="{{ '/beans/' | relative_url }}">豆の一覧と注文 →</a>
-  </div>
-  <ul class="tags-row">
-    {%- for b in site.data.beans.beans -%}{%- if b.status == "available" -%}
-    <li class="tag-card">
-      <a href="{{ '/beans/' | relative_url }}#{{ b.name | slugify }}">
-        <span class="tag-card__hole" aria-hidden="true"></span>
-        <span class="tag-card__name">{{ b.name }}</span>
-        {% include roast-level.html level=b.roast name=b.roast_name %}
-        <span class="tag-card__notes">{{ b.notes | join: " ／ " }}</span>
-      </a>
-    </li>
-    {%- endif -%}{%- endfor -%}
-  </ul>
-</section>
-
-{%- assign ig = site.data.instagram -%}
-{%- if ig and ig.size > 0 -%}
-<section class="wrap home-ig">
-  <div class="sec-head">
-    <h2><span class="sec-head__no">§3</span>Instagram より</h2>
-    <a class="more" href="https://www.instagram.com/{{ site.instagram }}/" target="_blank" rel="noopener noreferrer">@{{ site.instagram }} →</a>
-  </div>
-  <ul class="ig">
-    {%- for g in ig limit: 6 -%}
-    <li class="ig__item">
-      <a href="{{ g.permalink }}" target="_blank" rel="noopener noreferrer">
-        <img src="{{ g.image | relative_url }}" alt="{{ g.caption | default: 'Instagram の投稿' | escape }}" loading="lazy" width="320" height="320">
-        {% if g.video %}<span class="ig__video" aria-label="動画">▶</span>{% endif %}
-        {% if g.timestamp %}<time datetime="{{ g.timestamp }}">{{ g.timestamp | date: "%Y.%m.%d" }}</time>{% endif %}
-      </a>
-    </li>
-    {%- endfor -%}
-  </ul>
-</section>
-{%- endif -%}
 
 <section class="wrap home-visit">
   <div class="note-box">

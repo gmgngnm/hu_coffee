@@ -3,7 +3,7 @@
 # ─────────────────────────────────────────────
 title: 北大珈琲研究会
 title_en: Hokkaido University Coffee Society
-description: 北海道大学の学生が、生豆を選び、焙煎し、淹れて、記録する。自家焙煎豆の頒布と活動の記録。
+description: 北海道大学珈琲研究会です。大学生にスペシャルティコーヒーを広めるサークル。自家焙煎豆の頒布とブログ。
 lang: ja
 url: "https://gmgngnm.github.io"   # 独自ドメインにしたらここを書き換える
 baseurl: "/hu_coffee"              # 独自ドメインにしたら "" にする

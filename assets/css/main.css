@@ -24,8 +24,11 @@
   --field: #faf4e7;
   --shadow: 0 1px 0 rgba(0,0,0,.04), 0 6px 18px -10px rgba(13,60,30,.35);
 
-  --f-head: "Shippori Mincho B1", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  /* 見出しも本文と同じゴシック。太さだけで差をつける */
+  --f-head: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
   --f-body: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+  /* タブの手書き文字。ヘッダーの手書き hu_coffee に字形が近いものを選んだ */
+  --f-hand: "Nothing You Could Do", cursive;
   --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 
   --wrap: 1120px;
@@ -45,7 +48,7 @@ img, svg { max-width: 100%; height: auto; }
 a { color: var(--accent); text-underline-offset: .2em; text-decoration-thickness: 1px; }
 a:hover { color: var(--bean); }
 :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 2px; }
-h1, h2, h3 { font-family: var(--f-head); font-weight: 700; line-height: 1.4; letter-spacing: .04em; margin: 0 0 .6em; }
+h1, h2, h3 { font-family: var(--f-head); font-weight: 700; line-height: 1.4; letter-spacing: .02em; margin: 0 0 .6em; }
 .skip { position: absolute; left: -999px; top: 8px; background: var(--paper); padding: 8px 12px; z-index: 10; }
 .skip:focus { left: 8px; }
 
@@ -71,22 +74,25 @@ h1, h2, h3 { font-family: var(--f-head); font-weight: 700; line-height: 1.4; let
 
 .tabs { width: min(100% - 2 * var(--gutter), var(--wrap)); margin-inline: auto; }
 .tabs__list {
-  list-style: none; margin: 0; padding: 0; display: flex; gap: 4px;
+  /* ロゴが左にあるので、タブは右に寄せて左右の重さをそろえる */
+  list-style: none; margin: 0; padding: 0; display: flex; justify-content: flex-end; gap: 6px;
   overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
 }
 .tabs__list::-webkit-scrollbar { display: none; }
 .tab {
-  display: flex; align-items: baseline; gap: 8px; white-space: nowrap;
-  padding: 10px 18px 9px; margin-top: 6px;
+  display: flex; align-items: baseline; justify-content: center; gap: 8px; white-space: nowrap;
+  min-width: 128px; padding: 10px 26px 9px; margin-top: 6px;
   background: var(--paper-2); color: var(--ink-2); text-decoration: none;
   border-radius: 7px 7px 0 0; font-weight: 500; font-size: 15px;
   box-shadow: inset 0 -6px 8px -6px rgba(0,0,0,.18);
   transition: margin-top .15s, padding .15s, background .15s;
 }
 .tab:hover { color: var(--ink); margin-top: 2px; padding-bottom: 13px; }
-.tab__no { font: 500 11px var(--f-mono); color: var(--kraft); letter-spacing: .06em; }
+.tab__label { font: 400 21px/1 var(--f-hand); letter-spacing: .06em; padding-top: 2px; }
+.tab.is-current .tab__label { font-weight: 400; color: var(--ink); }
 .tab.is-current { background: var(--paper); color: var(--ink); margin-top: 0; padding-bottom: 15px; box-shadow: none; font-weight: 700; }
-.tab.is-current .tab__no { color: var(--stamp); }
+.tab.is-current .tab__label { font: 400 21px/1 var(--f-hand); letter-spacing: .06em; padding-top: 2px; }
+.tab.is-current .tab__label { font-weight: 400; color: var(--ink); }
 
 /* ---------- 紙（本文） ---------- */
 .sheet {
@@ -122,8 +128,16 @@ h1, h2, h3 { font-family: var(--f-head); font-weight: 700; line-height: 1.4; let
 
 /* ---------- ホーム ---------- */
 .hero { padding-bottom: clamp(40px, 6vw, 72px); }
+/* 左に挨拶、右の余白に Instagram の最新3件 */
+.hero__grid { display: grid; grid-template-columns: minmax(0, 1fr) 220px; gap: clamp(32px, 5vw, 72px); align-items: start; }
+.hero__ig { padding-top: 6px; }
+.hero__ig .ig { grid-template-columns: 1fr; gap: 22px; }
+.ig__more { display: inline-block; margin-top: 18px; }
+.ig--empty .ig__item img { object-fit: contain; padding: 18%; background: var(--paper-2); }
+.ig__note { position: absolute; left: 0; right: 0; bottom: 4px; text-align: center; font-size: 12.5px; line-height: 1.5; color: var(--ink-2); }
+.ig--empty .ig__item a { padding-bottom: 44px; }
 .hero__body { max-width: 40em; }
-.hero__title { font-size: clamp(28px, 5vw, 50px); line-height: 1.45; font-weight: 800; letter-spacing: .04em; margin: 0 0 .9em; }
+.hero__title { font-size: clamp(28px, 5vw, 50px); line-height: 1.45; font-weight: 900; letter-spacing: .02em; margin: 0 0 .9em; }
 .hero__title { font-size: clamp(26px, 5vw, 50px); }
 /* 「です!!」だけが次の行に落ちないよう、狭い画面では1行に収まる大きさまで縮める（約14.5文字分） */
 .hero__name { white-space: nowrap; font-size: min(1em, calc((100vw - 2 * var(--gutter)) / 14.5)); }
@@ -176,7 +190,6 @@ h1, h2, h3 { font-family: var(--f-head); font-weight: 700; line-height: 1.4; let
 .roast__name { font: 500 12px var(--f-mono); margin-left: 8px; color: var(--ink-2); }
 
 /* Instagram：ノートに貼ったプリント写真。一枚ずつ少しだけ角度を変える */
-.home-ig { margin-bottom: clamp(48px, 7vw, 80px); }
 .ig { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: clamp(14px, 2.4vw, 26px); }
 .ig__item a { position: relative; display: block; background: var(--field); padding: 8px 8px 30px; box-shadow: var(--shadow); text-decoration: none; transition: transform .18s; }
 .ig__item:nth-child(3n+1) a { transform: rotate(-1.4deg); }
@@ -186,7 +199,6 @@ h1, h2, h3 { font-family: var(--f-head); font-weight: 700; line-height: 1.4; let
 .ig__item img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; background: var(--paper-2); }
 .ig__item time { position: absolute; left: 10px; bottom: 6px; font: 400 11px var(--f-mono); color: var(--ink-2); }
 .ig__video { position: absolute; right: 14px; top: 14px; width: 26px; height: 26px; border-radius: 50%; background: rgba(0,0,0,.55); color: #fff; font-size: 11px; display: grid; place-items: center; }
-@media (max-width: 640px) { .ig { grid-template-columns: repeat(2, 1fr); } }
 
 .note-box { border: 1.5px solid var(--ink); background: var(--field); padding: clamp(22px, 4vw, 36px); position: relative; max-width: 760px; }
 .note-box::before { content: ""; position: absolute; top: -10px; left: 28px; width: 90px; height: 20px; background: rgba(201, 169, 122, .65); transform: rotate(-3deg); }
@@ -206,7 +218,7 @@ h1, h2, h3 { font-family: var(--f-head); font-weight: 700; line-height: 1.4; let
 .bean__prices { grid-column: 3; grid-row: 1 / span 2; list-style: none; margin: 0; padding: 0; display: grid; align-content: start; gap: 8px; min-width: 120px; }
 .bean__prices li { display: flex; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--ink); padding-bottom: 4px; font-family: var(--f-mono); font-size: 14px; }
 .bean__prices b { font-size: 17px; }
-.bean__stamp { position: absolute; right: 18px; bottom: -6px; margin: 0; font: 800 15px var(--f-head); color: var(--stamp); border: 2px solid var(--stamp); padding: 2px 10px; transform: rotate(-9deg); letter-spacing: .15em; opacity: .9; }
+.bean__stamp { position: absolute; right: 18px; bottom: -6px; margin: 0; font: 900 15px var(--f-head); color: var(--stamp); border: 2px solid var(--stamp); padding: 2px 10px; transform: rotate(-9deg); letter-spacing: .15em; opacity: .9; }
 .bean__stamp--soon { color: var(--accent); border-color: var(--accent); }
 .bean--soldout .bean__name, .bean--soldout .bean__spec, .bean--soldout .bean__prices { opacity: .55; }
 
@@ -294,10 +306,22 @@ input:focus, textarea:focus, select:focus { outline: none; border-bottom-color: 
 
 /* ---------- 裏表紙（フッター） ---------- */
 .site-foot { color: var(--cover-ink); position: relative; padding-bottom: 28px; }
-.poplars { color: var(--cover); background: var(--paper); line-height: 0; }
-.poplars svg { display: block; height: 70px; }
+.poplars {
+  background-color: var(--paper);
+  background-image:
+    repeating-linear-gradient(0deg, var(--weave) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(90deg, var(--weave) 0 1px, transparent 1px 5px);
+}
+/* ポプラ並木の影絵（assets/img/poplars.svg）をマスクにして表紙の緑で塗る。
+   奥の列は半透明にしてあるので、同じ緑でも遠近が出る */
+.poplars::before {
+  content: ""; display: block; height: 150px; background: var(--cover);
+  -webkit-mask: url("../img/poplars.svg") center bottom / auto 100% repeat-x;
+          mask: url("../img/poplars.svg") center bottom / auto 100% repeat-x;
+}
+@media (max-width: 640px) { .poplars::before { height: 110px; } }
 .site-foot__inner { width: min(100% - 2 * var(--gutter), var(--wrap)); margin: 36px auto 0; display: grid; grid-template-columns: 1fr auto; gap: 28px 40px; }
-.site-foot__name { font: 800 20px var(--f-head); letter-spacing: .12em; margin: 0 0 4px; }
+.site-foot__name { font: 700 20px var(--f-head); letter-spacing: .12em; margin: 0 0 4px; }
 .site-foot__sub { font-size: 13px; color: var(--cover-dim); margin: 0; line-height: 1.8; }
 .insta { display: grid; grid-template-columns: auto 1fr; column-gap: 12px; align-items: center; color: var(--cover-ink); text-decoration: none; border: 1px solid var(--cover-dim); padding: 14px 20px; border-radius: 3px; transition: background .15s; }
 .insta:hover { background: rgba(255,255,255,.06); color: var(--cover-ink); }
@@ -310,6 +334,9 @@ input:focus, textarea:focus, select:focus { outline: none; border-bottom-color: 
 
 /* ---------- 狭い画面 ---------- */
 @media (max-width: 860px) {
+  .hero__grid { grid-template-columns: 1fr; }
+  .hero__ig .ig { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .hero__ig .ig--empty { grid-template-columns: minmax(0, 200px); }
   .about-grid { grid-template-columns: 1fr; }
   .datasheet { position: static; }
   .bean { grid-template-columns: 1fr; }
@@ -326,9 +353,15 @@ input:focus, textarea:focus, select:focus { outline: none; border-bottom-color: 
   .brand { gap: 12px; }
   .tabs { width: calc(100% - 16px); }
   .tabs__list { gap: 3px; }
-  .tab { padding: 9px 10px 8px; font-size: 13.5px; gap: 6px; letter-spacing: 0; }
+  .tab { padding: 9px 11px 8px; font-size: 13.5px; gap: 6px; letter-spacing: 0; }
+  .tabs__list li { flex: 1 1 auto; }
+  .tab { min-width: 0; padding: 9px 6px 8px; }
+  .tab__label { font-size: 16px; letter-spacing: 0; }
+  .ig__item a { padding: 5px 5px 22px; }
+  .ig__item time { font-size: 9.5px; left: 6px; bottom: 4px; }
   .tab.is-current { padding-bottom: 12px; }
-  .tab__no { display: none; }
+  .tab__label { font: 400 21px/1 var(--f-hand); letter-spacing: .06em; padding-top: 2px; }
+.tab.is-current .tab__label { font-weight: 400; color: var(--ink); }
   .field-row { grid-template-columns: 1fr; }
   .steps { grid-template-columns: 1fr; }
   .entries { grid-template-columns: 1fr; }

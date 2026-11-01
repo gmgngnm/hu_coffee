@@ -10,9 +10,9 @@ GitHub Pages（無料・常時HTTPS）で公開する静的サイトです。ブ
 
 | ページ | ファイル |
 |---|---|
-| ホーム（最新の記録＋頒布中の豆） | `index.html` |
+| ホーム（挨拶＋Instagram） | `index.html` |
 | 焙煎豆（一覧＋取り置きフォーム） | `beans.html` ／ 豆のデータは `_data/beans.yml` |
-| 記録（ブログ一覧） | `blog/index.html` ／ 記事は `_posts/` |
+| BLOG（記事の一覧） | `blog/index.html` ／ 記事は `_posts/` |
 | 私たち | `about.md` |
 | お問い合わせ | `contact.html` |
 | プライバシーポリシー／特商法表記 | `privacy.md` ／ `legal.md` |

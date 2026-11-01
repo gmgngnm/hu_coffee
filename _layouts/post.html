@@ -6,7 +6,7 @@ nav: blog
 {%- for p in site.posts reversed -%}{%- if p.url == page.url -%}{%- assign no = forloop.index -%}{%- endif -%}{%- endfor -%}
 <article class="wrap post">
   <header class="post__head">
-    <p class="label">記録 No.{{ no | prepend: '00' | slice: -3, 3 }}　<time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y.%m.%d" }}</time>{% if page.author %}　記：{{ page.author }}{% endif %}</p>
+    <p class="label">BLOG No.{{ no | prepend: '00' | slice: -3, 3 }}　<time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y.%m.%d" }}</time>{% if page.author %}　記：{{ page.author }}{% endif %}</p>
     <h1>{{ page.title }}</h1>
     {% if page.tags.size > 0 %}<ul class="stamps">{% for t in page.tags %}<li>{{ t }}</li>{% endfor %}</ul>{% endif %}
   </header>
