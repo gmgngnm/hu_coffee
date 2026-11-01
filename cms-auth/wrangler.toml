@@ -1,0 +1,7 @@
+# コマンドで配備するとき用（npx wrangler deploy）。Cloudflare の画面に worker.js を貼り付けるなら不要
+name = "hu-coffee-cms-auth"
+main = "worker.js"
+compatibility_date = "2026-10-01"
+
+[vars]
+ALLOWED_ORIGIN = "https://gmgngnm.github.io"

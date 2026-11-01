@@ -1,27 +1,29 @@
 /* ==========================================================
    北大珈琲研究会 — 「研究ノート」
    深緑の布表紙のノートに、方眼の紙。上のタブはノートの見出しタブ。
-   色はエルムの深緑・クラフト紙・焙煎豆の茶・検印の朱だけに絞る。
+   トーンカラーは研究会の2色：エルムの森の緑（表紙）と、珈琲の実の赤（ボタン・印）。
+   ほかはクラフト紙と紙の色だけに絞る。
    ========================================================== */
 
 :root {
-  --cover: #23392f;        /* 表紙：エルムの深緑 */
+  --cover: #0d5a2c;        /* 表紙：エルムの森の緑（研究会のトーンカラー） */
   --cover-ink: #e9e3d3;
-  --cover-dim: #9fb3a6;
+  --cover-dim: #a9cbb3;
   --paper: #f3efe6;        /* 紙 */
   --paper-2: #e8e1d1;      /* タブ・ラベルの紙（少し日焼け） */
   --kraft: #c9a97a;
   --ink: #1d2420;
   --ink-2: #4c554f;
   --rule: #cfc6b2;
-  --grid: rgba(44, 74, 59, .07);
-  --grid-strong: rgba(44, 74, 59, .14);
-  --accent: #2c5a45;
-  --bean: #6b3f24;
-  --stamp: #b03a26;        /* 検印の朱 */
+  --grid: rgba(13, 90, 44, .07);
+  --grid-strong: rgba(13, 90, 44, .14);
+  --accent: #0d5a2c;
+  --bean: #9b1c2e;         /* 珈琲の実の赤（研究会のトーンカラー） */
+  --stamp: #9b1c2e;
+  --on-bean: #fbf3ee;
   --focus: #d2852b;
   --field: #fbf9f4;
-  --shadow: 0 1px 0 rgba(0,0,0,.04), 0 6px 18px -10px rgba(35,57,47,.35);
+  --shadow: 0 1px 0 rgba(0,0,0,.04), 0 6px 18px -10px rgba(13,60,30,.35);
 
   --f-head: "Shippori Mincho B1", "Hiragino Mincho ProN", "Yu Mincho", serif;
   --f-body: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
@@ -35,21 +37,21 @@
 /* 夜の部室。紙を墨色に、表紙はさらに深く。 */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --cover: #0f1a14; --cover-ink: #e4dece; --cover-dim: #8aa192;
+    --cover: #083d1e; --cover-ink: #e8e2d2; --cover-dim: #8fbb9d;
     --paper: #1f2421; --paper-2: #2a302b; --kraft: #a88a5f;
     --ink: #e6e1d6; --ink-2: #a9aea6; --rule: #3a413b;
     --grid: rgba(200, 220, 205, .045); --grid-strong: rgba(200, 220, 205, .09);
-    --accent: #8cc2a4; --bean: #d29a6c; --stamp: #e0705a; --field: #222723;
+    --accent: #7cc795; --bean: #e2687a; --stamp: #e2687a; --on-bean: #1f0a0e; --field: #252a26;
     --shadow: 0 6px 18px -10px rgba(0,0,0,.6);
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --cover: #0f1a14; --cover-ink: #e4dece; --cover-dim: #8aa192;
+  --cover: #083d1e; --cover-ink: #e8e2d2; --cover-dim: #8fbb9d;
   --paper: #1f2421; --paper-2: #2a302b; --kraft: #a88a5f;
   --ink: #e6e1d6; --ink-2: #a9aea6; --rule: #3a413b;
   --grid: rgba(200, 220, 205, .045); --grid-strong: rgba(200, 220, 205, .09);
-  --accent: #8cc2a4; --bean: #d29a6c; --stamp: #e0705a; --field: #222723;
+  --accent: #7cc795; --bean: #e2687a; --stamp: #e2687a; --on-bean: #1f0a0e; --field: #252a26;
   --shadow: 0 6px 18px -10px rgba(0,0,0,.6);
   color-scheme: dark;
 }
@@ -77,9 +79,11 @@ h1, h2, h3 { font-family: var(--f-head); font-weight: 700; line-height: 1.4; let
 /* ---------- 表紙（ヘッダー）とタブ ---------- */
 .site-head { color: var(--cover-ink); padding-top: 22px; position: relative; }
 .site-head__inner { width: min(100% - 2 * var(--gutter), var(--wrap)); margin-inline: auto; padding-bottom: 18px; }
-.brand { display: inline-flex; align-items: center; gap: 12px; color: inherit; text-decoration: none; }
+.brand { display: inline-flex; align-items: center; gap: 16px; color: inherit; text-decoration: none; }
 .brand:hover { color: inherit; }
-.brand__mark { color: var(--kraft); display: grid; }
+/* ロゴは白縁つきのステッカー。表紙に貼ったように少し傾ける */
+.brand__logo { display: block; width: auto; height: 68px; transform: rotate(-2deg); filter: drop-shadow(0 3px 4px rgba(0,0,0,.28)); transition: transform .2s; }
+.brand:hover .brand__logo { transform: rotate(0deg) scale(1.03); }
 .brand__text { display: grid; line-height: 1.25; }
 .brand__ja { font: 800 22px/1.2 var(--f-head); letter-spacing: .12em; }
 .brand__en { font: 500 10.5px/1.6 var(--f-mono); letter-spacing: .22em; color: var(--cover-dim); }
@@ -126,12 +130,12 @@ h1, h2, h3 { font-family: var(--f-head); font-weight: 700; line-height: 1.4; let
 .btn {
   display: inline-block; font: 700 15px/1 var(--f-body); letter-spacing: .08em;
   padding: 14px 22px; border: 1.5px solid var(--ink); border-radius: 2px;
-  background: var(--ink); color: var(--paper); text-decoration: none; cursor: pointer;
+  background: var(--bean); border-color: var(--bean); color: var(--on-bean); text-decoration: none; cursor: pointer;
   box-shadow: 3px 3px 0 var(--kraft); transition: transform .12s, box-shadow .12s;
 }
-.btn:hover { color: var(--paper); transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--kraft); }
+.btn:hover { color: var(--on-bean); transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--kraft); }
 .btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--kraft); }
-.btn--ghost { background: transparent; color: var(--ink); }
+.btn--ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
 .btn--ghost:hover { color: var(--ink); }
 .btn[disabled] { opacity: .45; cursor: not-allowed; transform: none; box-shadow: none; }
 
@@ -199,6 +203,19 @@ h1, h2, h3 { font-family: var(--f-head); font-weight: 700; line-height: 1.4; let
 .roast__b.is-on.roast__b--3 { background: #7c4723; } .roast__b.is-on.roast__b--4 { background: #552e17; }
 .roast__b.is-on.roast__b--5 { background: #2f190c; }
 .roast__name { font: 500 12px var(--f-mono); margin-left: 8px; color: var(--ink-2); }
+
+/* Instagram：ノートに貼ったプリント写真。一枚ずつ少しだけ角度を変える */
+.home-ig { margin-bottom: clamp(48px, 7vw, 80px); }
+.ig { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: clamp(14px, 2.4vw, 26px); }
+.ig__item a { position: relative; display: block; background: var(--field); padding: 8px 8px 30px; box-shadow: var(--shadow); text-decoration: none; transition: transform .18s; }
+.ig__item:nth-child(3n+1) a { transform: rotate(-1.4deg); }
+.ig__item:nth-child(3n+2) a { transform: rotate(.9deg); }
+.ig__item:nth-child(3n) a { transform: rotate(-.4deg); }
+.ig__item a:hover { transform: rotate(0) translateY(-3px); }
+.ig__item img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; background: var(--paper-2); }
+.ig__item time { position: absolute; left: 10px; bottom: 6px; font: 400 11px var(--f-mono); color: var(--ink-2); }
+.ig__video { position: absolute; right: 14px; top: 14px; width: 26px; height: 26px; border-radius: 50%; background: rgba(0,0,0,.55); color: #fff; font-size: 11px; display: grid; place-items: center; }
+@media (max-width: 640px) { .ig { grid-template-columns: repeat(2, 1fr); } }
 
 .note-box { border: 1.5px solid var(--ink); background: var(--field); padding: clamp(22px, 4vw, 36px); position: relative; max-width: 760px; }
 .note-box::before { content: ""; position: absolute; top: -10px; left: 28px; width: 90px; height: 20px; background: rgba(201, 169, 122, .65); transform: rotate(-3deg); }
@@ -272,6 +289,7 @@ input:focus, textarea:focus, select:focus { outline: none; border-bottom-color: 
 .specimen dt { font: 500 11px var(--f-mono); color: var(--ink-2); letter-spacing: .1em; }
 .specimen dd { margin: 0; font-weight: 700; }
 .prose { font-size: 16.5px; }
+.post__cover { display: block; width: 100%; margin: 24px 0 32px; border: 10px solid var(--field); box-shadow: var(--shadow); }
 .prose h2 { font-size: 23px; margin-top: 2em; padding-left: 14px; border-left: 4px solid var(--accent); }
 .prose h3 { font-size: 19px; margin-top: 1.6em; }
 .prose p, .prose ul, .prose ol { margin: 0 0 1.2em; }
@@ -332,7 +350,10 @@ input:focus, textarea:focus, select:focus { outline: none; border-bottom-color: 
 @media (max-width: 640px) {
   body { font-size: 15.5px; }
   .site-head { padding-top: 16px; }
-  .brand__ja { font-size: 19px; }
+  .brand__ja { font-size: 17px; }
+  .brand__en { font-size: 9px; letter-spacing: .14em; }
+  .brand__logo { height: 52px; }
+  .brand { gap: 12px; }
   .tabs { width: calc(100% - 16px); }
   .tabs__list { gap: 3px; }
   .tab { padding: 9px 10px 8px; font-size: 13.5px; gap: 6px; letter-spacing: 0; }

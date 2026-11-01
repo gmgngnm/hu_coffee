@@ -44,9 +44,9 @@ nav: home
     <a class="more" href="{{ '/beans/' | relative_url }}">豆の一覧と注文 →</a>
   </div>
   <ul class="tags-row">
-    {%- for b in site.data.beans -%}{%- if b.status == "available" -%}
+    {%- for b in site.data.beans.beans -%}{%- if b.status == "available" -%}
     <li class="tag-card">
-      <a href="{{ '/beans/' | relative_url }}#{{ b.id }}">
+      <a href="{{ '/beans/' | relative_url }}#{{ b.name | slugify }}">
         <span class="tag-card__hole" aria-hidden="true"></span>
         <span class="tag-card__name">{{ b.name }}</span>
         {% include roast-level.html level=b.roast name=b.roast_name %}
@@ -56,6 +56,27 @@ nav: home
     {%- endif -%}{%- endfor -%}
   </ul>
 </section>
+
+{%- assign ig = site.data.instagram -%}
+{%- if ig and ig.size > 0 -%}
+<section class="wrap home-ig">
+  <div class="sec-head">
+    <h2><span class="sec-head__no">§3</span>Instagram より</h2>
+    <a class="more" href="https://www.instagram.com/{{ site.instagram }}/" target="_blank" rel="noopener noreferrer">@{{ site.instagram }} →</a>
+  </div>
+  <ul class="ig">
+    {%- for g in ig limit: 6 -%}
+    <li class="ig__item">
+      <a href="{{ g.permalink }}" target="_blank" rel="noopener noreferrer">
+        <img src="{{ g.image | relative_url }}" alt="{{ g.caption | default: 'Instagram の投稿' | escape }}" loading="lazy" width="320" height="320">
+        {% if g.video %}<span class="ig__video" aria-label="動画">▶</span>{% endif %}
+        {% if g.timestamp %}<time datetime="{{ g.timestamp }}">{{ g.timestamp | date: "%Y.%m.%d" }}</time>{% endif %}
+      </a>
+    </li>
+    {%- endfor -%}
+  </ul>
+</section>
+{%- endif -%}
 
 <section class="wrap home-visit">
   <div class="note-box">

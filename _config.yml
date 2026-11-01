@@ -9,6 +9,7 @@ url: "https://gmgngnm.github.io"   # 独自ドメインにしたらここを書�
 baseurl: "/hu_coffee"              # 独自ドメインにしたら "" にする
 
 instagram: hu_coffee
+image: /assets/img/og.png         # SNS で共有したときに出る画像
 
 # ── 外部サービス（未設定なら空のまま。空だと該当機能は読み込まれない）──
 # Google アナリティクス 4 の測定ID（例: G-XXXXXXXXXX）
@@ -43,3 +44,5 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - vendor
+  - cms-auth
+  - scripts

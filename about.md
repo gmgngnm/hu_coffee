@@ -35,9 +35,11 @@ description: 北大珈琲研究会の活動内容、一年の流れ、入会案�
   <dl>
     <div><dt>名称</dt><dd>北大珈琲研究会</dd></div>
     <div><dt>拠点</dt><dd>北海道大学 札幌キャンパス</dd></div>
-    <div><dt>活動日</dt><dd class="todo">（例：毎週水曜 18:00〜）</dd></div>
-    <div><dt>部員数</dt><dd class="todo">（例：約20名）</dd></div>
-    <div><dt>設立</dt><dd class="todo">（例：20XX年）</dd></div>
+    {%- assign c = site.data.club -%}
+    {% if c.activity_days != "" %}<div><dt>活動日</dt><dd>{{ c.activity_days }}</dd></div>{% endif %}
+    {% if c.room != "" %}<div><dt>部室</dt><dd>{{ c.room }}</dd></div>{% endif %}
+    {% if c.members != "" %}<div><dt>部員数</dt><dd>{{ c.members }}</dd></div>{% endif %}
+    {% if c.founded != "" %}<div><dt>設立</dt><dd>{{ c.founded }}</dd></div>{% endif %}
     <div><dt>連絡先</dt><dd><a href="{{ '/contact/' | relative_url }}">お問い合わせフォーム</a><br><a href="https://www.instagram.com/{{ site.instagram }}/" target="_blank" rel="noopener noreferrer">Instagram @{{ site.instagram }}</a></dd></div>
   </dl>
 </aside>

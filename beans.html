@@ -12,8 +12,8 @@ description: 北大珈琲研究会が自家焙煎した豆の一覧と、取り�
   </header>
 
   <ul class="beans">
-    {%- for b in site.data.beans -%}
-    <li class="bean bean--{{ b.status }}" id="{{ b.id }}">
+    {%- for b in site.data.beans.beans -%}
+    <li class="bean bean--{{ b.status }}" id="{{ b.name | slugify }}">
       <div class="bean__label">
         <p class="bean__no">SPECIMEN {{ forloop.index | prepend: '0' | slice: -2, 2 }}</p>
         <h2 class="bean__name">{{ b.name }}</h2>
@@ -32,7 +32,7 @@ description: 北大珈琲研究会が自家焙煎した豆の一覧と、取り�
       </dl>
       <p class="bean__comment">{{ b.comment }}</p>
       <ul class="bean__prices">
-        {%- for pr in b.prices -%}<li><span>{{ pr[0] }}</span><b>¥{{ pr[1] }}</b></li>{%- endfor -%}
+        {%- for pr in b.prices -%}<li><span>{{ pr.size }}</span><b>¥{{ pr.price }}</b></li>{%- endfor -%}
       </ul>
     </li>
     {%- endfor -%}
@@ -55,12 +55,12 @@ description: 北大珈琲研究会が自家焙煎した豆の一覧と、取り�
       <fieldset class="field">
         <legend>豆と量 <span class="req">必須</span></legend>
         <div class="order-lines">
-          {%- for b in site.data.beans -%}{%- if b.status == "available" -%}
+          {%- for b in site.data.beans.beans -%}{%- if b.status == "available" -%}
             {%- for pr in b.prices -%}
             <label class="order-line">
-              <span class="order-line__name">{{ b.name }} <small>{{ pr[0] }}</small></span>
-              <span class="order-line__price">¥{{ pr[1] }}</span>
-              <select name="{{ b.name }} {{ pr[0] }}" data-price="{{ pr[1] }}">
+              <span class="order-line__name">{{ b.name }} <small>{{ pr.size }}</small></span>
+              <span class="order-line__price">¥{{ pr.price }}</span>
+              <select name="{{ b.name }} {{ pr.size }}" data-price="{{ pr.price }}">
                 {% for n in (0..5) %}<option value="{{ n }}">{{ n }}袋</option>{% endfor %}
               </select>
             </label>

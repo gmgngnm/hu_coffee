@@ -1,0 +1,20 @@
+---
+layout: null
+sitemap: false
+---
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>管理画面 | {{ site.title }}</title>
+  <link rel="icon" href="{{ '/assets/img/favicon-32.png' | relative_url }}" type="image/png">
+  <link rel="cms-config-url" href="{{ '/admin/config.yml' | relative_url }}" type="text/yaml">
+</head>
+<body>
+  <!-- 版を固定しておく。上げるときは数字だけ書き換える -->
+  <script src="https://unpkg.com/decap-cms@3.17.1/dist/decap-cms.js"></script>
+  <script src="{{ '/admin/preview.js' | relative_url }}"></script>
+</body>
+</html>

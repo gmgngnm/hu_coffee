@@ -10,12 +10,18 @@ nav: blog
     <h1>{{ page.title }}</h1>
     {% if page.tags.size > 0 %}<ul class="stamps">{% for t in page.tags %}<li>{{ t }}</li>{% endfor %}</ul>{% endif %}
   </header>
-  {% if page.roast %}
+  {% if page.roast and page.roast.size > 0 %}
   <dl class="specimen">
-    {% for r in page.roast %}<div><dt>{{ r[0] }}</dt><dd>{{ r[1] }}</dd></div>{% endfor %}
+    {% for r in page.roast %}<div><dt>{{ r.label }}</dt><dd>{{ r.value }}</dd></div>{% endfor %}
   </dl>
   {% endif %}
-  <div class="prose">{{ content }}</div>
+  {% if page.image %}<img class="post__cover" src="{{ page.image | relative_url }}" alt="">{% endif %}
+  {%- comment -%}
+    管理画面で本文に入れた画像は "/assets/..." で保存される。サイトが /hu_coffee/ の下にあるので、
+    ここで前に付け足す（独自ドメインにして baseurl を空にすればそのまま通る）。
+  {%- endcomment -%}
+  {%- assign asset_src = 'src="' | append: site.baseurl | append: '/assets/' -%}
+  <div class="prose">{{ content | replace: 'src="/assets/', asset_src }}</div>
   <nav class="post__pager">
     {% if page.previous %}<a href="{{ page.previous.url | relative_url }}">← {{ page.previous.title }}</a>{% else %}<span></span>{% endif %}
     {% if page.next %}<a href="{{ page.next.url | relative_url }}">{{ page.next.title }} →</a>{% endif %}

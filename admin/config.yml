@@ -1,0 +1,103 @@
+# ─────────────────────────────────────────────
+# Decap CMS（管理画面 /admin/）の設定
+# ─────────────────────────────────────────────
+backend:
+  name: github
+  repo: gmgngnm/hu_coffee
+  branch: main
+  # GitHub ログインの中継役（cms-auth/ の Cloudflare Worker）の URL。README の手順で作って書き換える
+  base_url: https://hu-coffee-cms-auth.YOUR-ACCOUNT.workers.dev
+  commit_messages:
+    create: "記事を追加：{{slug}}"
+    update: "更新：{{slug}}"
+    delete: "削除：{{slug}}"
+    uploadMedia: "画像を追加：{{path}}"
+    deleteMedia: "画像を削除：{{path}}"
+
+# 手元で試すとき（npx decap-server を起動しておく）だけ有効になる。本番には影響しない
+local_backend: true
+
+locale: ja
+site_url: https://gmgngnm.github.io/hu_coffee/
+display_url: https://gmgngnm.github.io/hu_coffee/
+logo_url: https://gmgngnm.github.io/hu_coffee/assets/img/logo.png
+
+# 画像は assets/img/uploads に入る。本文中の "/assets/..." はサイト側でパスを補っている
+media_folder: assets/img/uploads
+public_folder: /assets/img/uploads
+
+collections:
+  - name: posts
+    label: 記録（ブログ）
+    label_singular: 記事
+    folder: _posts
+    create: true
+    # 日本語のタイトルは URL にしにくいので、日付と時刻でファイル名を作る
+    slug: "{{year}}-{{month}}-{{day}}-post-{{hour}}{{minute}}{{second}}"
+    summary: "{{year}}.{{month}}.{{day}}　{{title}}"
+    sortable_fields: [date, title]
+    preview_path: "blog/{{year}}/{{month}}/{{day}}/{{filename}}/"
+    fields:
+      - { name: title, label: タイトル, widget: string }
+      - { name: date, label: 日付, widget: datetime, default: "{{now}}", format: "YYYY-MM-DD HH:mm:ss ZZ", date_format: "YYYY.MM.DD", time_format: "HH:mm" }
+      - { name: author, label: 書いた人, widget: string, required: false, hint: "例：焙煎係、広報。空欄でもよい" }
+      - { name: tags, label: タグ, widget: list, required: false, hint: "カンマ区切り（例：焙煎, イベント）" }
+      - { name: image, label: 見出し画像, widget: image, required: false, hint: "横長の写真がおすすめ。SNSで共有したときにも使われます" }
+      - name: roast
+        label: 焙煎記録
+        label_singular: 項目
+        widget: list
+        required: false
+        collapsed: false
+        hint: "焙煎の回なら、豆・投入量・煎り止め時刻などを入れると記事の冒頭に表で出ます"
+        fields:
+          - { name: label, label: 項目, widget: string }
+          - { name: value, label: 内容, widget: string }
+      - { name: body, label: 本文, widget: markdown, hint: "最初の段落が一覧に抜粋として出ます" }
+
+  - name: data
+    label: サイトの情報
+    editor: { preview: false }
+    files:
+      - name: beans
+        label: 焙煎豆
+        file: _data/beans.yml
+        fields:
+          - name: beans
+            label: 豆の一覧
+            label_singular: 豆
+            widget: list
+            summary: "{{fields.name}}（{{fields.status}}）"
+            fields:
+              - { name: name, label: 名前, widget: string }
+              - name: status
+                label: 状態
+                widget: select
+                options:
+                  - { label: 頒布中, value: available }
+                  - { label: 次回焙煎, value: soon }
+                  - { label: 売り切れ, value: soldout }
+              - { name: origin, label: 産地, widget: string }
+              - { name: process, label: 精製, widget: string, hint: "例：ウォッシュト、ナチュラル" }
+              - { name: variety, label: 品種, widget: string, required: false }
+              - { name: roast, label: 焙煎度（1=浅 〜 5=深）, widget: number, value_type: int, min: 1, max: 5 }
+              - { name: roast_name, label: 焙煎度の呼び名, widget: string, hint: "例：浅煎り、中深煎り" }
+              - { name: notes, label: 風味, widget: list, hint: "カンマ区切り（例：ブルーベリー, 紅茶）" }
+              - { name: comment, label: ひとこと, widget: text }
+              - { name: roasted_on, label: 焙煎日, widget: datetime, format: "YYYY-MM-DD", time_format: false, required: false }
+              - name: prices
+                label: 価格
+                label_singular: 内容量
+                widget: list
+                summary: "{{fields.size}}：¥{{fields.price}}"
+                fields:
+                  - { name: size, label: 内容量, widget: string, hint: "例：100g" }
+                  - { name: price, label: 価格（円）, widget: number, value_type: int, min: 0 }
+      - name: club
+        label: 研究会の情報
+        file: _data/club.yml
+        fields:
+          - { name: activity_days, label: 活動日, widget: string, required: false }
+          - { name: room, label: 部室, widget: string, required: false }
+          - { name: members, label: 部員数, widget: string, required: false }
+          - { name: founded, label: 設立, widget: string, required: false }
