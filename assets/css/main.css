@@ -185,6 +185,7 @@ h1, h2, h3 { font-family: var(--f-head); font-weight: 400; line-height: 1.45; le
 /* 横の写真がある広い画面では、画面幅ではなく文章の欄の幅に合わせる */
 @container (min-width: 1px) { .hero__name { font-size: min(1em, calc(100cqi / 14.2)); } }
 .hero__body p { margin: 0 0 1.1em; font-size: clamp(15.5px, 1.7vw, 17px); line-height: 2; }
+.ph { display: inline-block; }
 /* 最後のひとことは、ノートに書き足したように少し大きく、下線をマーカーで */
 .hero__body .hero__cheers { font: 500 clamp(18px, 2.4vw, 22px)/1.8 var(--f-head); margin-top: 1.6em; }
 .hero__cheers span { background: linear-gradient(transparent 62%, rgba(155, 28, 46, .16) 62%); }
@@ -392,6 +393,9 @@ input:focus, textarea:focus, select:focus { outline: none; border-bottom-color: 
   .hero__title { order: 2; margin-bottom: .5em; }
   .hero__photos { order: 3; }
   .hero__body { order: 4; }
+  /* スマホは1行に収まる字数が少ないので、字を少し小さく・行間を詰めて、文のまとまりを見やすくする */
+  .hero__body p { font-size: 15px; line-height: 1.85; margin-bottom: .95em; letter-spacing: .02em; }
+  .hero__body .hero__cheers { font-size: 17px; line-height: 1.75; margin-top: 1.3em; }
   /* 写真は縦に積まず、大きい1枚の右に小さい2枚を重ねて、縦の長さを抑える */
   .hero__photos { grid-template-columns: 1.45fr 1fr; grid-template-rows: auto auto; width: 100%; max-width: 480px; margin: 4px auto 28px; padding: 8px 6px 0 0; }
   .snap { padding: 5px 5px 14px; }
