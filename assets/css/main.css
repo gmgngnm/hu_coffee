@@ -92,10 +92,7 @@ h1, h2, h3 { font-family: var(--f-head); font-weight: 400; line-height: 1.45; le
 }
 .tab:hover { color: var(--ink); margin-top: 2px; padding-bottom: 13px; }
 .tab__label { font: 400 21px/1 var(--f-hand); letter-spacing: .06em; padding-top: 2px; }
-.tab.is-current .tab__label { font-weight: 400; color: var(--ink); }
 .tab.is-current { background: var(--paper); color: var(--ink); margin-top: 0; padding-bottom: 15px; box-shadow: none; font-weight: 500; }
-.tab.is-current .tab__label { font: 400 21px/1 var(--f-hand); letter-spacing: .06em; padding-top: 2px; }
-.tab.is-current .tab__label { font-weight: 400; color: var(--ink); }
 
 /* ---------- 紙（本文） ---------- */
 .sheet {
@@ -387,8 +384,21 @@ input:focus, textarea:focus, select:focus { outline: none; border-bottom-color: 
 @media (max-width: 860px) {
   .products { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .hero__grid { grid-template-columns: 1fr; }
-  /* スマホでは写真を先に見せる（文章を読む前に雰囲気が伝わるように） */
-  .hero__photos { order: -1; max-width: 520px; margin: 0 auto 28px; }
+  /* スマホでは「こんにちは。〜です!!」の直後に写真を挟み、そのあと本文。
+     .hero__inner の中身を grid に直接並べて、順番を入れ替える */
+  .hero__grid { row-gap: 0; }
+  .hero__inner { display: contents; }
+  .hero__inner .label { order: 1; }
+  .hero__title { order: 2; margin-bottom: .5em; }
+  .hero__photos { order: 3; }
+  .hero__body { order: 4; }
+  /* 写真は縦に積まず、大きい1枚の右に小さい2枚を重ねて、縦の長さを抑える */
+  .hero__photos { grid-template-columns: 1.45fr 1fr; grid-template-rows: auto auto; width: 100%; max-width: 480px; margin: 4px auto 28px; padding: 8px 6px 0 0; }
+  .snap { padding: 5px 5px 14px; }
+  .snap::before { width: 46px; height: 13px; top: -6px; margin-left: -23px; }
+  .snap--stall { grid-column: 1; grid-row: 1 / span 2; align-self: center; }
+  .snap--counter { grid-column: 2; grid-row: 1; margin: 0 0 0 -10px; }
+  .snap--pour { grid-column: 2; grid-row: 2; margin: -10px 0 0 -2px; }
   .home-lower { grid-template-columns: 1fr; }
   .home-blog, .home-visit, .home-ig { grid-column: 1; grid-row: auto; }
   .home-ig { margin-bottom: clamp(40px, 6vw, 64px); max-width: 420px; width: 100%; justify-self: center; }
@@ -407,15 +417,11 @@ input:focus, textarea:focus, select:focus { outline: none; border-bottom-color: 
   .brand__sign { flex: 0 1 auto; min-width: 0; height: auto; width: min(166px, calc(100vw - 2 * var(--gutter) - 140px)); }
   .brand__logo { height: 52px; }
   .brand { gap: 12px; }
-  .tabs { width: calc(100% - 16px); }
+  /* PC と同じく、ロゴは左・タブは右。タブは字を小さくして右側にまとめる */
   .tabs__list { gap: 3px; }
-  .tab { padding: 9px 11px 8px; font-size: 13.5px; gap: 6px; letter-spacing: 0; }
-  .tabs__list li { flex: 1 1 auto; }
-  .tab { min-width: 0; padding: 9px 6px 8px; }
-  .tab__label { font-size: 16px; letter-spacing: 0; }
-  .tab.is-current { padding-bottom: 12px; }
-  .tab__label { font: 400 21px/1 var(--f-hand); letter-spacing: .06em; padding-top: 2px; }
-.tab.is-current .tab__label { font-weight: 400; color: var(--ink); }
+  .tab { min-width: 0; padding: 8px 9px 7px; letter-spacing: 0; }
+  .tab__label { font-size: 15px; letter-spacing: 0; }
+  .tab.is-current { padding-bottom: 11px; }
   .field-row { grid-template-columns: 1fr; }
   .entries { grid-template-columns: 1fr; }
   .entries--list .entry__link { grid-template-columns: auto 1fr; }
