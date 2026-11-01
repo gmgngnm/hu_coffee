@@ -106,6 +106,17 @@ nav: home
     <a class="more" href="{{ site.calendar_url }}" target="_blank" rel="noopener noreferrer">カレンダーで見る →</a>
     {%- endif %}
   </div>
+  <div class="events-wrap">
+  {%- comment -%} 月のカレンダー。中身は main.js が今月から描く（予定は data-events から読む） {%- endcomment -%}
+  <div class="cal" data-events="{{ events | jsonify | escape }}" hidden>
+    <div class="cal__head">
+      <button class="cal__nav" type="button" data-step="-1" aria-label="前の月">‹</button>
+      <p class="cal__title" aria-live="polite"></p>
+      <button class="cal__nav" type="button" data-step="1" aria-label="次の月">›</button>
+    </div>
+    <div class="cal__grid" role="grid"></div>
+  </div>
+  <div class="events-side">
   <ol class="events"{% if events.size == 0 %} hidden{% endif %}>
     {%- for e in events %}
     <li class="event" data-end="{{ e.end }}">
@@ -120,4 +131,6 @@ nav: home
     {%- endfor %}
   </ol>
   <p class="events__empty"{% if events.size > 0 %} hidden{% endif %}>いまのところ決まっている出店はありません。決まり次第、ここと Instagram でお知らせします。</p>
+  </div>
+  </div>
 </section>
