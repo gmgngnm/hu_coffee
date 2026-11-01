@@ -84,9 +84,13 @@ h1, h2, h3 { font-family: var(--f-head); font-weight: 700; line-height: 1.4; let
 /* ロゴは白縁つきのステッカー。表紙に貼ったように少し傾ける */
 .brand__logo { display: block; width: auto; height: 68px; transform: rotate(-2deg); filter: drop-shadow(0 3px 4px rgba(0,0,0,.28)); transition: transform .2s; }
 .brand:hover .brand__logo { transform: rotate(0deg) scale(1.03); }
-.brand__text { display: grid; line-height: 1.25; }
-.brand__ja { font: 800 22px/1.2 var(--f-head); letter-spacing: .12em; }
-.brand__en { font: 500 10.5px/1.6 var(--f-mono); letter-spacing: .22em; color: var(--cover-dim); }
+/* 手書きの hu_coffee。線の形だけの画像をマスクにして、表紙の文字色で塗る（暗い配色でもそのまま読める） */
+.brand__sign {
+  display: block; height: 58px; aspect-ratio: 2346 / 566; background: var(--cover-ink);
+  -webkit-mask: url("../img/hu_coffee-sign.png") center / contain no-repeat;
+          mask: url("../img/hu_coffee-sign.png") center / contain no-repeat;
+}
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
 .tabs { width: min(100% - 2 * var(--gutter), var(--wrap)); margin-inline: auto; }
 .tabs__list {
@@ -350,8 +354,7 @@ input:focus, textarea:focus, select:focus { outline: none; border-bottom-color: 
 @media (max-width: 640px) {
   body { font-size: 15.5px; }
   .site-head { padding-top: 16px; }
-  .brand__ja { font-size: 17px; }
-  .brand__en { font-size: 9px; letter-spacing: .14em; }
+  .brand__sign { height: 40px; }
   .brand__logo { height: 52px; }
   .brand { gap: 12px; }
   .tabs { width: calc(100% - 16px); }

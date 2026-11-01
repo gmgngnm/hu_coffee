@@ -20,7 +20,7 @@ GitHub Pages（無料・常時HTTPS）で公開する静的サイトです。ブ
 | 管理画面 | `admin/`（設定は `admin/config.yml`） |
 | 管理画面のログイン中継 | `cms-auth/`（Cloudflare に置く。サイトには含まれない） |
 | Instagram の取得 | `scripts/fetch_instagram.py` ／ `.github/workflows/pages.yml` |
-| ロゴ・アイコン | `assets/img/`（`logo.png` がヘッダー、`favicon-32.png` などがアイコン） |
+| ロゴ・アイコン | `assets/img/`（ヘッダーは `logo.png` と手書きの `hu_coffee-sign.png`、`favicon-32.png` などがアイコン） |
 | デザイン案 B・C | `proposals/` |
 
 ---
