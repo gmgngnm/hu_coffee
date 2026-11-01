@@ -141,7 +141,7 @@ bundle exec jekyll serve
 ## 技術メモ
 
 - GitHub Pages ではHTTPヘッダーを設定できないので、Content-Security-Policy は `<meta>` で出しています（`_includes/head.html`）。インラインの `<script>` / `style=""` は CSP で弾かれるので、JSは `assets/js/`、スタイルは `assets/css/main.css` に書いてください。
-- 暗い画面設定（ダークモード）の端末では、自動で夜用の配色になります。
+- 地の色は明るい麻袋の色（`--paper`）。端末が暗い画面設定（ダークモード）でも、この明るい配色のまま表示します。
 - トーンカラーは2色：エルムの森の緑 `#0d5a2c`（ヘッダー・フッター）と、珈琲の実の赤 `#9b1c2e`（ボタン・印）。`assets/css/main.css` の先頭で変えられます。
 - 管理画面（`admin/`）は Decap CMS を unpkg から読み込むので、サイト本体の CSP はかけていません。
 - 北海道大学の公式ロゴ・校章は使っていません（使用には大学の許可が必要です）。

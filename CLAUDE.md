@@ -11,7 +11,8 @@ GitHub Actions（`.github/workflows/pages.yml`）で `actions/jekyll-build-pages
 
 - 画面の文言・コミットは日本語。部員（Web初心者）が読むので README は平易に
 - CSP を meta で出している。インライン script・style 属性は書かない
-- 見た目を変えたら明るい／暗いテーマ、PC／スマホ幅（390px）の両方で撮って確かめる
+- 配色は明るい麻袋の地に、エルムの緑と珈琲の赤。ダークモードは利用者の希望で持たない
+- 見た目を変えたら PC／スマホ幅（390px と 320px）で撮って確かめる。横にはみ出していないかも測る
 - 手元ビルド: `JEKYLL_NO_BUNDLER_REQUIRE=true BUNDLE_GEMFILE=/nonexistent jekyll build`
   （Gemfile の github-pages gem を入れずに済ませるため）
 - フォームは Formspree、テストでは `page.route` で差し替えて実際には送らない

@@ -3,20 +3,19 @@ layout: default
 nav: home
 ---
 <section class="hero">
-  <div class="wrap hero__grid">
-    <div class="hero__text">
-      <p class="label">FIELD NOTES ON COFFEE ／ 札幌キャンパス</p>
-      <h1 class="hero__title">一杯を、<br>研究する。</h1>
-      <p class="hero__lead">北大珈琲研究会は、生豆を選び、自分たちの手で焙煎し、淹れて、その結果を記録している学生団体です。焙煎した豆は、学内外のみなさんに少しずつお分けしています。</p>
-      <p class="hero__actions">
-        <a class="btn" href="{{ '/beans/' | relative_url }}">いま頒布中の豆</a>
-        <a class="btn btn--ghost" href="{{ '/about/' | relative_url }}">研究会について</a>
-      </p>
+  <div class="wrap hero__inner">
+    <p class="label">WELCOME ／ 札幌キャンパス</p>
+    <h1 class="hero__title">こんにちは。<br><span class="hero__name">北海道大学珈琲研究会です!!</span></h1>
+    <div class="hero__body">
+      <p>みなさんは「スペシャルティコーヒー」って知ってますか??</p>
+      <p>コーヒーの印象といえば苦い、まずい、カフェイン摂取のために飲んでるなどあるかもしれませんが、「スペシャルティコーヒー」はそんなことありません。<br>一度飲んだらこんなコーヒーあるんだ!!って思ってもらえると思います。</p>
+      <p>このサークルはコーヒーに触れるのにちょっとまだハードルがある大学生年代の人々にスペシャルティコーヒーを広めるために設立されました。<br>私たちはいろいろな角度からコーヒーを扱い、コーヒーへのハードルを下げていきます。是非一回インスタを見てみてくださいね。</p>
+      <p class="hero__cheers"><span>何はともあれとりあえず一緒にコーヒー飲みましょう☕</span></p>
     </div>
-    <figure class="hero__fig">
-      {% include roast-chart.svg %}
-      <figcaption>図1　焙煎記録の一例（グアテマラ／中煎り）。毎回の焙煎で温度と時間を記録し、味と照らし合わせています。</figcaption>
-    </figure>
+    <p class="hero__actions">
+      <a class="btn" href="https://www.instagram.com/{{ site.instagram }}/" target="_blank" rel="noopener noreferrer">インスタを見る</a>
+      <a class="btn btn--ghost" href="{{ '/beans/' | relative_url }}">いま頒布中の豆</a>
+    </p>
   </div>
 </section>
 

@@ -2,27 +2,26 @@
    北大珈琲研究会 — 「研究ノート」
    深緑の布表紙のノートに、方眼の紙。上のタブはノートの見出しタブ。
    トーンカラーは研究会の2色：エルムの森の緑（表紙）と、珈琲の実の赤（ボタン・印）。
-   ほかはクラフト紙と紙の色だけに絞る。
+   地の色は明るい麻袋。端末が暗い配色でも、この明るい地のまま見せる。
    ========================================================== */
 
 :root {
   --cover: #0d5a2c;        /* 表紙：エルムの森の緑（研究会のトーンカラー） */
   --cover-ink: #e9e3d3;
   --cover-dim: #a9cbb3;
-  --paper: #f3efe6;        /* 紙 */
-  --paper-2: #e8e1d1;      /* タブ・ラベルの紙（少し日焼け） */
-  --kraft: #c9a97a;
+  --paper: #e6d6b6;        /* 地：明るい麻袋 */
+  --paper-2: #d5c09a;      /* タブ（少し濃い麻） */
+  --kraft: #b98f5c;
   --ink: #1d2420;
-  --ink-2: #4c554f;
-  --rule: #cfc6b2;
-  --grid: rgba(13, 90, 44, .07);
-  --grid-strong: rgba(13, 90, 44, .14);
+  --ink-2: #4b4436;
+  --rule: #bba57f;
+  --weave: rgba(96, 66, 28, .07);  /* 麻の織り目 */
   --accent: #0d5a2c;
   --bean: #9b1c2e;         /* 珈琲の実の赤（研究会のトーンカラー） */
   --stamp: #9b1c2e;
   --on-bean: #fbf3ee;
   --focus: #d2852b;
-  --field: #fbf9f4;
+  --field: #faf4e7;
   --shadow: 0 1px 0 rgba(0,0,0,.04), 0 6px 18px -10px rgba(13,60,30,.35);
 
   --f-head: "Shippori Mincho B1", "Hiragino Mincho ProN", "Yu Mincho", serif;
@@ -32,28 +31,6 @@
   --wrap: 1120px;
   --gutter: clamp(16px, 4vw, 40px);
   color-scheme: light;
-}
-
-/* 夜の部室。紙を墨色に、表紙はさらに深く。 */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --cover: #083d1e; --cover-ink: #e8e2d2; --cover-dim: #8fbb9d;
-    --paper: #1f2421; --paper-2: #2a302b; --kraft: #a88a5f;
-    --ink: #e6e1d6; --ink-2: #a9aea6; --rule: #3a413b;
-    --grid: rgba(200, 220, 205, .045); --grid-strong: rgba(200, 220, 205, .09);
-    --accent: #7cc795; --bean: #e2687a; --stamp: #e2687a; --on-bean: #1f0a0e; --field: #252a26;
-    --shadow: 0 6px 18px -10px rgba(0,0,0,.6);
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --cover: #083d1e; --cover-ink: #e8e2d2; --cover-dim: #8fbb9d;
-  --paper: #1f2421; --paper-2: #2a302b; --kraft: #a88a5f;
-  --ink: #e6e1d6; --ink-2: #a9aea6; --rule: #3a413b;
-  --grid: rgba(200, 220, 205, .045); --grid-strong: rgba(200, 220, 205, .09);
-  --accent: #7cc795; --bean: #e2687a; --stamp: #e2687a; --on-bean: #1f0a0e; --field: #252a26;
-  --shadow: 0 6px 18px -10px rgba(0,0,0,.6);
-  color-scheme: dark;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -114,10 +91,10 @@ h1, h2, h3 { font-family: var(--f-head); font-weight: 700; line-height: 1.4; let
 /* ---------- 紙（本文） ---------- */
 .sheet {
   display: block; background-color: var(--paper);
+  /* 縦横の細い筋を重ねて、麻袋の織り目に見せる */
   background-image:
-    linear-gradient(var(--grid) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-  background-size: 24px 24px;
+    repeating-linear-gradient(0deg, var(--weave) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(90deg, var(--weave) 0 1px, transparent 1px 5px);
   padding: clamp(28px, 5vw, 64px) 0 clamp(56px, 8vw, 96px);
   min-height: 60vh;
 }
@@ -145,26 +122,16 @@ h1, h2, h3 { font-family: var(--f-head); font-weight: 700; line-height: 1.4; let
 
 /* ---------- ホーム ---------- */
 .hero { padding-bottom: clamp(40px, 6vw, 72px); }
-.hero__grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(28px, 5vw, 64px); align-items: center; }
-.hero__title { font-size: clamp(44px, 8vw, 92px); line-height: 1.12; font-weight: 800; letter-spacing: .06em; margin: 0 0 .35em; }
-.hero__lead { max-width: 30em; color: var(--ink-2); }
-.hero__actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
-.hero__fig { margin: 0; background: var(--field); border: 1px solid var(--rule); padding: 18px 16px 12px; box-shadow: var(--shadow); transform: rotate(.6deg); }
-.hero__fig figcaption { font-size: 12.5px; color: var(--ink-2); margin-top: 6px; line-height: 1.7; }
-
-.chart { display: block; width: 100%; }
-.chart__axis text { font-family: var(--f-mono); fill: var(--ink-2); }
-.chart__line { fill: none; stroke: var(--bean); stroke-width: 2.6; stroke-linecap: round; stroke-dasharray: 900; stroke-dashoffset: 900; animation: draw 2.2s .3s ease-out forwards; }
-.chart__line--sub { stroke: var(--accent); stroke-width: 1.4; stroke-dasharray: 4 5; animation: none; opacity: .7; }
-@keyframes draw { to { stroke-dashoffset: 0; } }
-.chart__note circle { fill: var(--field); stroke: var(--ink); stroke-width: 1.4; }
-.chart__note .chart__stop { fill: var(--stamp); stroke: none; }
-.chart__note path { stroke: var(--ink-2); stroke-width: 1; stroke-dasharray: 2 3; }
-.chart__note text { font: 500 11px var(--f-mono); fill: var(--ink); }
-.chart__legend text { font: 500 10px var(--f-mono); fill: var(--ink-2); }
-.chart__legend path { stroke-width: 2; fill: none; }
-.chart__hand { font: 500 14px var(--f-head); fill: var(--stamp); transform: rotate(-4deg); transform-origin: 140px 120px; }
-.chart__hand-arrow { fill: none; stroke: var(--stamp); stroke-width: 1.3; }
+.hero__body { max-width: 40em; }
+.hero__title { font-size: clamp(28px, 5vw, 50px); line-height: 1.45; font-weight: 800; letter-spacing: .04em; margin: 0 0 .9em; }
+.hero__title { font-size: clamp(26px, 5vw, 50px); }
+/* 「です!!」だけが次の行に落ちないよう、狭い画面では1行に収まる大きさまで縮める（約14.5文字分） */
+.hero__name { white-space: nowrap; font-size: min(1em, calc((100vw - 2 * var(--gutter)) / 14.5)); }
+.hero__body p { margin: 0 0 1.1em; font-size: clamp(15.5px, 1.7vw, 17px); line-height: 2; }
+/* 最後のひとことは、ノートに書き足したように少し大きく、下線をマーカーで */
+.hero__body .hero__cheers { font: 700 clamp(18px, 2.4vw, 22px)/1.8 var(--f-head); margin-top: 1.6em; }
+.hero__cheers span { background: linear-gradient(transparent 62%, rgba(155, 28, 46, .16) 62%); }
+.hero__actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; }
 
 .home-log, .home-beans { margin-bottom: clamp(48px, 7vw, 80px); }
 
@@ -191,12 +158,12 @@ h1, h2, h3 { font-family: var(--f-head); font-weight: 700; line-height: 1.4; let
 .tags-row { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 20px; }
 .tag-card a {
   position: relative; display: grid; gap: 8px; padding: 22px 20px 20px 46px; min-height: 100%;
-  background: var(--kraft); color: #2a1d12; text-decoration: none;
+  background: var(--field); color: #2a1d12; box-shadow: var(--shadow); text-decoration: none;
   clip-path: polygon(14px 0, 100% 0, 100% 100%, 14px 100%, 0 calc(100% - 14px), 0 14px);
   transition: transform .15s;
 }
 .tag-card a:hover { transform: rotate(-1deg) translateY(-2px); color: #2a1d12; }
-.tag-card__hole { position: absolute; left: 16px; top: 50%; width: 14px; height: 14px; margin-top: -7px; border-radius: 50%; background: var(--paper); box-shadow: inset 0 0 0 3px rgba(0,0,0,.12); }
+.tag-card__hole { position: absolute; left: 16px; top: 50%; width: 14px; height: 14px; margin-top: -7px; border-radius: 50%; background: var(--paper); box-shadow: inset 0 0 0 3px var(--kraft); }
 .tag-card__name { font: 700 18px/1.4 var(--f-head); }
 .tag-card__notes { font-size: 13px; word-break: keep-all; overflow-wrap: anywhere; }
 .tag-card .roast__name { color: #2a1d12; }
@@ -343,8 +310,6 @@ input:focus, textarea:focus, select:focus { outline: none; border-bottom-color: 
 
 /* ---------- 狭い画面 ---------- */
 @media (max-width: 860px) {
-  .hero__grid { grid-template-columns: 1fr; }
-  .hero__fig { transform: none; }
   .about-grid { grid-template-columns: 1fr; }
   .datasheet { position: static; }
   .bean { grid-template-columns: 1fr; }
@@ -355,6 +320,8 @@ input:focus, textarea:focus, select:focus { outline: none; border-bottom-color: 
   body { font-size: 15.5px; }
   .site-head { padding-top: 16px; }
   .brand__sign { height: 40px; }
+  .brand { max-width: 100%; }
+  .brand__sign { flex: 0 1 auto; min-width: 0; height: auto; width: min(166px, calc(100vw - 2 * var(--gutter) - 140px)); }
   .brand__logo { height: 52px; }
   .brand { gap: 12px; }
   .tabs { width: calc(100% - 16px); }
