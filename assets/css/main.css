@@ -392,6 +392,11 @@ input:focus, textarea:focus, select:focus { outline: none; border-bottom-color: 
   .hero__inner .label { order: 1; }
   .hero__title { order: 2; margin-bottom: .5em; }
   .hero__photos { order: 3; }
+  /* ほかのページも、スマホでは字を少し小さく・行間を詰める（ホームの本文とそろえる） */
+  .lead, .sec-lead { font-size: 15px; line-height: 1.85; }
+  .prose { font-size: 15.5px; }
+  .prose p, .prose ul, .prose ol { line-height: 1.85; }
+  .page-title { font-size: 32px; }
   .hero__body { order: 4; }
   /* スマホは1行に収まる字数が少ないので、字を少し小さく・行間を詰めて、文のまとまりを見やすくする */
   .hero__body p { font-size: 15px; line-height: 1.85; margin-bottom: .95em; letter-spacing: .02em; }

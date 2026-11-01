@@ -48,3 +48,4 @@ exclude:
   - Gemfile.lock
   - vendor
   - cms-auth
+  - assets/js/phrase.src.js

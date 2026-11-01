@@ -139,6 +139,11 @@ bundle exec jekyll serve
 
 ## 技術メモ
 
+- 日本語の文章は、文節の切れ目でだけ折り返すようにしている（`assets/js/phrase.js`、Google の BudouX を同梱）。
+  対象の部分を増やすときは `assets/js/phrase.src.js` の一覧に足し、次で作り直す：
+  `npm i budoux@0.9.3 esbuild && npx esbuild assets/js/phrase.src.js --bundle --minify --format=iife --outfile=assets/js/phrase.js`
+  （作り直したら、ファイル先頭の説明コメントを付け直す）
+
 - GitHub Pages ではHTTPヘッダーを設定できないので、Content-Security-Policy は `<meta>` で出しています（`_includes/head.html`）。インラインの `<script>` / `style=""` は CSP で弾かれるので、JSは `assets/js/`、スタイルは `assets/css/main.css` に書いてください。
 - 地の色は明るい麻袋の色（`--paper`）。端末が暗い画面設定（ダークモード）でも、この明るい配色のまま表示します。
 - トーンカラーは2色：エルムの森の緑 `#0d5a2c`（ヘッダー・フッター）と、珈琲の実の赤 `#9b1c2e`（ボタン・印）。`assets/css/main.css` の先頭で変えられます。
