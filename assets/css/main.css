@@ -167,12 +167,9 @@ h1, h2, h3 { font-family: var(--f-head); font-weight: 400; line-height: 1.45; le
 .ig-feed__user { font-weight: 600; font-size: 14px; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 .ig-feed__btn { background: #0095f6; color: #fff; font-weight: 600; font-size: 12.5px; padding: 6px 11px; border-radius: 6px; text-decoration: none; white-space: nowrap; }
 .ig-feed__btn:hover { background: #1877f2; color: #fff; }
-.ig-feed__list { list-style: none; margin: 0; padding: 0; }
-/* 投稿と投稿のあいだは、細い線ではなく灰色の帯で区切って、別の投稿だと一目で分かるようにする */
-.ig-feed__list li { border-bottom: 1px solid #c7c7c7; }
-.ig-feed__list li + li { border-top: 1px solid #c7c7c7; margin-top: 14px; }
-.ig-feed__list { background: #e9e9e9; }
-.ig-feed__list li { background: #fff; }
+/* 大きな枠の中に、投稿を1件ずつ小さな枠に入れて縦に並べる */
+.ig-feed__list { list-style: none; margin: 0; display: grid; gap: 12px; padding: 12px; background: #fafafa; }
+.ig-feed__list li { background: #fff; border: 1px solid #dbdbdb; border-radius: 4px; overflow: hidden; }
 /* 投稿ごとに、画像を枠の幅いっぱい（元の比率のまま）に出し、その下に日付と本文 */
 .ig-feed__item { display: block; color: inherit; text-decoration: none; }
 .ig-feed__item:hover { background: #fafafa; color: inherit; }
@@ -180,7 +177,7 @@ h1, h2, h3 { font-family: var(--f-head); font-weight: 400; line-height: 1.45; le
 .ig-feed__text { display: grid; gap: 4px; padding: 12px 14px 14px; }
 .ig-feed__text time { color: #8e8e8e; font-size: 12px; }
 .ig-feed__cap { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-.ig-feed__more { display: block; text-align: center; padding: 12px; border-top: 14px solid #e9e9e9; color: #0095f6; font-weight: 600; text-decoration: none; }
+.ig-feed__more { display: block; text-align: center; padding: 12px; border-top: 1px solid #efefef; color: #0095f6; font-weight: 600; text-decoration: none; }
 .ig-feed__more:hover { color: #00376b; }
 .hero__body { max-width: 40em; }
 .hero__title { font-size: clamp(28px, 5vw, 50px); line-height: 1.45; letter-spacing: .02em; margin: 0 0 .9em; }
