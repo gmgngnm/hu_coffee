@@ -73,11 +73,24 @@ nav: home
     </div>
     <script async src="https://www.instagram.com/embed.js"></script>
     {%- else %}
-    <a class="ig-card" href="https://www.instagram.com/{{ site.instagram }}/" target="_blank" rel="noopener noreferrer">
-      <img src="{{ '/assets/img/icon-192.png' | relative_url }}" alt="" width="96" height="96">
-      <span class="ig-card__name">@{{ site.instagram }}</span>
-      <span class="ig-card__note">最新の投稿は Instagram でご覧ください</span>
-    </a>
+    {%- comment -%} 埋め込みに使う URL がまだ無いあいだは、手元に置いた投稿を埋め込みと同じ見た目で出す {%- endcomment -%}
+    {%- assign profile = "https://www.instagram.com/" | append: site.instagram | append: "/" -%}
+    <div class="ig-embeds">
+      {%- for g in site.data.instagram_cards.posts limit: 3 %}
+      {%- assign link = g.url | default: profile -%}
+      <article class="ig-post">
+        <header class="ig-post__head">
+          <img class="ig-post__avatar" src="{{ '/assets/img/instagram/avatar.png' | relative_url }}" alt="" width="32" height="32">
+          <span class="ig-post__user">{{ site.instagram }}</span>
+          <a class="ig-post__btn" href="{{ profile }}" target="_blank" rel="noopener noreferrer">プロフィールを表示</a>
+        </header>
+        <a href="{{ link }}" target="_blank" rel="noopener noreferrer"><img class="ig-post__img" src="{{ g.image | relative_url }}" alt="Instagram の投稿：{{ g.caption | newline_to_br | split: '<br />' | first | strip | escape }}" width="720" height="720" loading="lazy"></a>
+        <a class="ig-post__more" href="{{ link }}" target="_blank" rel="noopener noreferrer">Instagramでもっと見る</a>
+        <p class="ig-post__cap"><b>{{ site.instagram }}</b> {{ g.caption | escape | newline_to_br }}</p>
+        <time class="ig-post__date" datetime="{{ g.date | date: '%Y-%m-%d' }}">{{ g.date | date: "%-m月%-d日" }}</time>
+      </article>
+      {%- endfor %}
+    </div>
     {%- endif %}
   </aside>
 

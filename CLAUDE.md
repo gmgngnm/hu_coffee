@@ -3,6 +3,7 @@
 GitHub Actions（`.github/workflows/pages.yml`）で `actions/jekyll-build-pages` を使って組み立て、Pages に出す。
 ビルドの前に `scripts/fetch_instagram.py` が Instagram の最新投稿の URL を `_data/instagram.json` に取ってくる。
 ホームはその3件（無ければ `_data/instagram_pick.yml` の手選び）を公式の埋め込み（embed.js）で出す。
+どちらも無いときは `_data/instagram_cards.yml` の手元の投稿を、埋め込みと同じ見た目のカードで出す。
 そのためホームだけ CSP に instagram.com と style の inline を足している（`_includes/head.html`）。
 使えるプラグインは GitHub Pages が許すもの（jekyll-feed / seo-tag / sitemap）だけ。
 
