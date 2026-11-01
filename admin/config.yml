@@ -87,6 +87,7 @@ collections:
                   - { label: 芳香剤, value: aroma }
                   - { label: スプーン, value: spoon }
                   - { label: カップ, value: cup }
+              - { name: image, label: 写真, widget: image, required: false, media_folder: /assets/img/products, public_folder: /assets/img/products, hint: "横4:縦3がきれいに収まります。無ければ線画が出ます" }
               - { name: desc, label: 説明, widget: text }
               - { name: price, label: 価格（円・税込）, widget: number, value_type: int, min: 0, required: false, hint: "未定なら空欄（「価格は近日公開」と出ます）" }
               - { name: options, label: 選べる種類, widget: list, required: false, hint: "カンマ区切り（例：豆のまま, 挽き豆）" }

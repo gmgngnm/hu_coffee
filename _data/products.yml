@@ -1,6 +1,7 @@
 # ─────────────────────────────────────────────
 # SHOP の商品。管理画面（/admin/）の「サイトの情報 → 商品」からも編集できる。
-#   icon:    絵の種類（dripper / dripbag / beans / aroma / spoon / cup）
+#   icon:    写真が無いときに出す線画の種類（dripper / dripbag / beans / aroma / spoon / cup）
+#   image:   商品の写真（assets/img/products/ に置く。横4:縦3）
 #   price:   価格（円）。未定なら空欄
 #   options: 選べる種類（例：豆のまま、挽き豆）。無ければ空のまま
 #   buy_url: その商品の購入ページ（BASE や STORES の商品URL）。
@@ -11,6 +12,7 @@
 products:
   - name: 自作ドリッパー
     icon: dripper
+    image: /assets/img/products/dripper.jpg
     desc: 部員が設計からつくったドリッパー。湯の落ち方を試作で何度も確かめています。
     price:
     options: []
@@ -19,6 +21,7 @@ products:
 
   - name: コーヒーパック
     icon: dripbag
+    image: /assets/img/products/dripbag.jpg
     desc: カップにかけてお湯を注ぐだけ。研究会で焙煎した豆を使ったドリップバッグです。
     price:
     options: []
@@ -27,6 +30,7 @@ products:
 
   - name: 焙煎豆
     icon: beans
+    image: /assets/img/products/beans.jpg
     desc: 自家焙煎のスペシャルティコーヒー。いま扱っている豆は下の「焙煎豆のラインナップ」をご覧ください。
     price:
     options: [豆のまま, 挽き豆]
@@ -43,6 +47,7 @@ products:
 
   - name: カッピングスプーン
     icon: spoon
+    image: /assets/img/products/spoon.jpg
     desc: 味を見比べるカッピングで使う、深めの専用スプーン。
     price:
     options: []
@@ -51,6 +56,7 @@ products:
 
   - name: 珈琲用カップ
     icon: cup
+    image: /assets/img/products/cup.jpg
     desc: 香りが立ちやすい形を選んだ、コーヒーのためのカップ。
     price:
     options: []

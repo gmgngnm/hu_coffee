@@ -24,7 +24,13 @@ description: 北大珈琲研究会のオンラインショップ。自作のド�
       {%- for p in site.data.products.products -%}
       {%- assign url = p.buy_url | default: shop_url -%}
       <li class="product product--{{ p.status }}">
-        <div class="product__pic">{% include product-icon.html icon=p.icon %}
+        <div class="product__pic{% if p.image %} product__pic--photo{% endif %}">
+          {%- if p.image -%}
+          <img src="{{ p.image | relative_url }}" alt="" width="960" height="720" loading="lazy">
+          <span class="product__note">写真はイメージです</span>
+          {%- else -%}
+          {% include product-icon.html icon=p.icon %}
+          {%- endif -%}
           {%- case p.status -%}
             {%- when "soon" -%}<span class="product__badge">準備中</span>
             {%- when "soldout" -%}<span class="product__badge product__badge--out">売り切れ</span>
