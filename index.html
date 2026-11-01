@@ -14,10 +14,6 @@ nav: home
       <p>このサークルはコーヒーに触れるのにちょっとまだハードルがある大学生年代の人々にスペシャルティコーヒーを広めるために設立されました。<br>私たちはいろいろな角度からコーヒーを扱い、コーヒーへのハードルを下げていきます。是非一回インスタを見てみてくださいね。</p>
       <p class="hero__cheers"><span>何はともあれとりあえず一緒にコーヒー飲みましょう☕</span></p>
     </div>
-    <p class="hero__actions">
-      <a class="btn" href="https://www.instagram.com/{{ site.instagram }}/" target="_blank" rel="noopener noreferrer">インスタを見る</a>
-      <a class="btn btn--ghost" href="{{ '/beans/' | relative_url }}">いま頒布中の豆</a>
-    </p>
   </div>
 
   {%- comment -%} 活動の写真3枚を、ノートに貼ったプリントのように少しずつ重ねて置く {%- endcomment -%}
@@ -34,6 +30,22 @@ nav: home
   </div>
   </div>
 </section>
+
+{%- assign total = site.posts | size -%}
+{%- if total > 0 %}
+<section class="wrap home-blog" aria-labelledby="home-blog-head">
+  <div class="sec-head">
+    <h2 id="home-blog-head">BLOG</h2>
+    <a class="more" href="{{ '/blog/' | relative_url }}">すべての記事 →</a>
+  </div>
+  <ol class="entries entries--list entries--wide">
+    {%- for post in site.posts limit: 3 -%}
+      {%- assign no = total | minus: forloop.index0 -%}
+      {% include post-card.html post=post no=no %}
+    {%- endfor -%}
+  </ol>
+</section>
+{%- endif %}
 
 {%- if ig and ig.size > 0 %}
 <section class="wrap home-ig">
