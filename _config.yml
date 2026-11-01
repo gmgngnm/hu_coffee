@@ -1,0 +1,45 @@
+# ─────────────────────────────────────────────
+# サイト全体の設定。変更後は GitHub に push すると数分で反映される。
+# ─────────────────────────────────────────────
+title: 北大珈琲研究会
+title_en: Hokkaido University Coffee Society
+description: 北海道大学の学生が、生豆を選び、焙煎し、淹れて、記録する。自家焙煎豆の頒布と活動の記録。
+lang: ja
+url: "https://gmgngnm.github.io"   # 独自ドメインにしたらここを書き換える
+baseurl: "/hu_coffee"              # 独自ドメインにしたら "" にする
+
+instagram: hu_coffee
+
+# ── 外部サービス（未設定なら空のまま。空だと該当機能は読み込まれない）──
+# Google アナリティクス 4 の測定ID（例: G-XXXXXXXXXX）
+google_analytics: ""
+# Formspree のフォームID（https://formspree.io/f/xxxxabcd の xxxxabcd 部分）
+formspree_contact: ""
+formspree_order: ""
+# 予備の連絡先メール（フォーム未設定のときに案内として表示）
+contact_email: ""
+
+timezone: Asia/Tokyo
+permalink: /blog/:year/:month/:day/:title/
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+defaults:
+  - scope: { path: "", type: posts }
+    values: { layout: post }
+  - scope: { path: "proposals" }
+    values: { sitemap: false }
+
+exclude:
+  - README.md
+  - CLAUDE.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor

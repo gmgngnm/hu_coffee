@@ -1,0 +1,66 @@
+---
+layout: default
+nav: home
+---
+<section class="hero">
+  <div class="wrap hero__grid">
+    <div class="hero__text">
+      <p class="label">FIELD NOTES ON COFFEE ／ 札幌キャンパス</p>
+      <h1 class="hero__title">一杯を、<br>研究する。</h1>
+      <p class="hero__lead">北大珈琲研究会は、生豆を選び、自分たちの手で焙煎し、淹れて、その結果を記録している学生団体です。焙煎した豆は、学内外のみなさんに少しずつお分けしています。</p>
+      <p class="hero__actions">
+        <a class="btn" href="{{ '/beans/' | relative_url }}">いま頒布中の豆</a>
+        <a class="btn btn--ghost" href="{{ '/about/' | relative_url }}">研究会について</a>
+      </p>
+    </div>
+    <figure class="hero__fig">
+      {% include roast-chart.svg %}
+      <figcaption>図1　焙煎記録の一例（グアテマラ／中煎り）。毎回の焙煎で温度と時間を記録し、味と照らし合わせています。</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="wrap home-log">
+  <div class="sec-head">
+    <h2><span class="sec-head__no">§1</span>最近の記録</h2>
+    <a class="more" href="{{ '/blog/' | relative_url }}">すべての記録 →</a>
+  </div>
+  {%- assign total = site.posts | size -%}
+  {%- if total > 0 -%}
+  <ol class="entries">
+    {%- for post in site.posts limit: 6 -%}
+      {%- assign no = total | minus: forloop.index0 -%}
+      {% include post-card.html post=post no=no %}
+    {%- endfor -%}
+  </ol>
+  {%- else -%}
+  <p class="empty">まだ記録がありません。</p>
+  {%- endif -%}
+</section>
+
+<section class="wrap home-beans">
+  <div class="sec-head">
+    <h2><span class="sec-head__no">§2</span>頒布中の豆</h2>
+    <a class="more" href="{{ '/beans/' | relative_url }}">豆の一覧と注文 →</a>
+  </div>
+  <ul class="tags-row">
+    {%- for b in site.data.beans -%}{%- if b.status == "available" -%}
+    <li class="tag-card">
+      <a href="{{ '/beans/' | relative_url }}#{{ b.id }}">
+        <span class="tag-card__hole" aria-hidden="true"></span>
+        <span class="tag-card__name">{{ b.name }}</span>
+        {% include roast-level.html level=b.roast name=b.roast_name %}
+        <span class="tag-card__notes">{{ b.notes | join: " ／ " }}</span>
+      </a>
+    </li>
+    {%- endif -%}{%- endfor -%}
+  </ul>
+</section>
+
+<section class="wrap home-visit">
+  <div class="note-box">
+    <h2>部室・出店でも飲めます</h2>
+    <p>学祭や学内イベントで出店するほか、部室で試飲会をひらくことがあります。日程は Instagram でお知らせしています。</p>
+    <a class="btn btn--ghost" href="https://www.instagram.com/{{ site.instagram }}/" target="_blank" rel="noopener noreferrer">Instagram を見る</a>
+  </div>
+</section>

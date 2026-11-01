@@ -1,0 +1,20 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{%- comment -%}
+  GitHub Pages は HTTP ヘッダーを設定できないので、CSP は meta で出す。
+  GA と Formspree を使うときだけ、その接続先を許可に加える。
+{%- endcomment -%}
+{%- capture csp_script -%}'self'{% if site.google_analytics != "" %} https://www.googletagmanager.com{% endif %}{%- endcapture -%}
+{%- capture csp_connect -%}'self'{% if site.google_analytics != "" %} https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com{% endif %} https://formspree.io{%- endcapture -%}
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src {{ csp_script }}; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:{% if site.google_analytics != "" %} https://*.google-analytics.com https://*.googletagmanager.com{% endif %}; connect-src {{ csp_connect }}; form-action https://formspree.io; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#f3efe6">
+<link rel="icon" href="{{ '/assets/img/favicon.svg' | relative_url }}" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+{% seo %}
+{% feed_meta %}
+{% include analytics.html %}
+<script src="{{ '/assets/js/main.js' | relative_url }}" defer></script>

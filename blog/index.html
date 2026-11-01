@@ -1,0 +1,26 @@
+---
+layout: default
+title: 記録
+nav: blog
+description: 北大珈琲研究会の活動記録。焙煎会、抽出の比較、出店の様子など。
+---
+<div class="wrap">
+  <header class="page-head">
+    <p class="label">03 ／ LOG</p>
+    <h1>記録</h1>
+    <p class="lead">焙煎会のメモ、抽出の比較、出店の報告。うまくいかなかった回も残しています。</p>
+  </header>
+  {%- assign total = site.posts | size -%}
+  {%- for post in site.posts -%}
+    {%- assign y = post.date | date: "%Y" -%}
+    {%- if y != prev_y -%}
+      {%- unless forloop.first %}</ol>{% endunless %}
+      <h2 class="year">{{ y }}</h2>
+      <ol class="entries entries--list">
+      {%- assign prev_y = y -%}
+    {%- endif -%}
+    {%- assign no = total | minus: forloop.index0 -%}
+    {% include post-card.html post=post no=no %}
+    {%- if forloop.last %}</ol>{% endif -%}
+  {%- endfor -%}
+</div>

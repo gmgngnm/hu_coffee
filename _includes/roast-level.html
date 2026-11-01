@@ -1,0 +1,5 @@
+{%- comment -%} 焙煎度を 1（浅）〜 5（深）の豆5粒で示す。色は実際の焙煎色の段階に合わせた。 {%- endcomment -%}
+<span class="roast" role="img" aria-label="焙煎度 {{ include.level }} / 5（{{ include.name }}）">
+  {%- for i in (1..5) -%}<i class="roast__b roast__b--{{ i }}{% if i <= include.level %} is-on{% endif %}"></i>{%- endfor -%}
+  <span class="roast__name">{{ include.name }}</span>
+</span>

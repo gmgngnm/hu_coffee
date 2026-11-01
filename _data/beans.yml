@@ -1,0 +1,58 @@
+# ─────────────────────────────────────────────
+# 焙煎豆の一覧。ここを書き換えると「焙煎豆」ページと注文フォームの選択肢が変わる。
+#   status: available（頒布中） / soon（次回焙煎） / soldout（売り切れ）
+#   roast:  1（浅）〜 5（深）
+#   prices: 内容量ごとの価格（円）。不要な量は行ごと消してよい
+# ※ 以下は見本です。実際の豆に差し替えてください。
+# ─────────────────────────────────────────────
+- id: ethiopia-guji
+  name: エチオピア グジ
+  origin: エチオピア・オロミア州 グジ地区
+  process: ナチュラル
+  variety: 在来系
+  roast: 2
+  roast_name: 浅煎り
+  notes: [ブルーベリー, 紅茶, はちみつ]
+  comment: 冷めるほど甘さがはっきりしてくる豆。研究会では「最初の一杯」にすすめることが多いです。
+  roasted_on: 2026-10-24
+  prices: { 100g: 900, 200g: 1700 }
+  status: available
+
+- id: guatemala-huehue
+  name: グアテマラ ウエウエテナンゴ
+  origin: グアテマラ・ウエウエテナンゴ県
+  process: ウォッシュト
+  variety: ブルボン、カトゥーラ
+  roast: 3
+  roast_name: 中煎り
+  notes: [ミルクチョコ, オレンジ, ナッツ]
+  comment: 部室で一番減りが早い豆。ミルクにも合わせやすい、毎日向きの味です。
+  roasted_on: 2026-10-24
+  prices: { 100g: 800, 200g: 1500 }
+  status: available
+
+- id: brazil-cerrado
+  name: ブラジル セラード
+  origin: ブラジル・ミナスジェライス州
+  process: パルプドナチュラル
+  variety: ムンドノーボ
+  roast: 4
+  roast_name: 中深煎り
+  notes: [カカオ, ローストアーモンド, 黒糖]
+  comment: 試験期間の夜のための一杯。苦味は太いけれど後味は軽め。
+  roasted_on: 2026-10-17
+  prices: { 100g: 700, 200g: 1300 }
+  status: soldout
+
+- id: kenya-nyeri
+  name: ケニア ニエリ
+  origin: ケニア・ニエリ県
+  process: ウォッシュト
+  variety: SL28、SL34
+  roast: 2
+  roast_name: 浅煎り
+  notes: [カシス, トマト, 黒糖]
+  comment: 次回の焙煎会で焼きます。酸味の好きな人はぜひ。
+  roasted_on:
+  prices: { 100g: 1000 }
+  status: soon

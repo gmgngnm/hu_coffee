@@ -1,0 +1,10 @@
+{%- assign p = include.post -%}
+<li class="entry">
+  <a class="entry__link" href="{{ p.url | relative_url }}">
+    <span class="entry__no">No.{{ include.no | prepend: '00' | slice: -3, 3 }}</span>
+    <time class="entry__date" datetime="{{ p.date | date_to_xmlschema }}">{{ p.date | date: "%Y.%m.%d" }}</time>
+    <span class="entry__title">{{ p.title }}</span>
+    <span class="entry__excerpt">{{ p.excerpt | strip_html | strip_newlines | truncate: 78 }}</span>
+    {% if p.tags.size > 0 %}<span class="entry__tags">{% for t in p.tags %}<span>{{ t }}</span>{% endfor %}</span>{% endif %}
+  </a>
+</li>

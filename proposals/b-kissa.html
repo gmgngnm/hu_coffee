@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>デザイン案B 農学校の喫茶室</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Zen+Old+Mincho:wght@400;700;900&display=swap">
+<style>
+/* 案B：札幌農学校の時代の洋館と活版印刷。赤い屋根・白い下見板・紺の飾り罫。 */
+:root { --bg:#f6f0e2; --ink:#1e2a44; --red:#9c2f22; --line:#1e2a44; --mute:#6b6a64; --card:#fffaf0; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#16192a; --ink:#ece4d0; --red:#e07a63; --line:#ece4d0; --mute:#a8a397; --card:#1e2236; } }
+:root[data-theme="dark"] { --bg:#16192a; --ink:#ece4d0; --red:#e07a63; --line:#ece4d0; --mute:#a8a397; --card:#1e2236; }
+* { box-sizing:border-box } body { margin:0; background:var(--bg); color:var(--ink); font:400 16px/2 "Zen Old Mincho", serif; }
+a { color:inherit }
+.top { text-align:center; padding:28px 16px 0; }
+.top small { font:italic 500 15px "Cormorant Garamond", serif; letter-spacing:.2em; color:var(--red); }
+.top h1 { font-weight:900; font-size:clamp(26px,5vw,38px); letter-spacing:.3em; margin:4px 0 0; }
+.rule { height:7px; border-top:3px double var(--line); border-bottom:1px solid var(--line); width:min(100% - 32px, 1040px); margin:16px auto 0; }
+nav ul { list-style:none; display:flex; justify-content:center; gap:0; margin:0 auto; padding:0; width:min(100% - 32px,1040px); border-bottom:1px solid var(--line); overflow-x:auto; }
+nav a { display:block; padding:12px clamp(10px,2.4vw,28px); text-decoration:none; font-weight:700; letter-spacing:.15em; white-space:nowrap; font-size:15px; }
+nav a[aria-current] { background:var(--ink); color:var(--bg); }
+.hero { width:min(100% - 32px,1040px); margin:48px auto; display:grid; grid-template-columns:auto 1fr; gap:clamp(24px,6vw,72px); align-items:start; }
+.tate { writing-mode:vertical-rl; font-weight:900; font-size:clamp(34px,6vw,60px); line-height:1.5; letter-spacing:.18em; margin:0; height:8.5em; }
+.tate em { font-style:normal; color:var(--red); }
+.frame { border:1px solid var(--line); padding:10px; } .frame > div { border:3px double var(--line); padding:clamp(20px,4vw,40px); background:var(--card); }
+.frame h2 { font-size:22px; letter-spacing:.2em; margin:0 0 6px; } .frame p { margin:0 0 1em; }
+.orn { text-align:center; color:var(--red); letter-spacing:1em; margin:12px 0; }
+.since { font:italic 500 20px "Cormorant Garamond", serif; color:var(--mute); }
+.cols { width:min(100% - 32px,1040px); margin:0 auto 64px; display:grid; grid-template-columns:repeat(3,1fr); border-top:3px double var(--line); }
+.cols article { padding:20px 22px 28px; border-right:1px solid var(--line); }
+.cols article:last-child { border-right:0; }
+.cols time { font:500 15px "Cormorant Garamond", serif; color:var(--red); letter-spacing:.1em; }
+.cols h3 { font-size:19px; line-height:1.6; margin:4px 0 8px; } .cols p { font-size:14.5px; color:var(--mute); margin:0; line-height:1.9; }
+.ticket { width:min(100% - 32px,640px); margin:0 auto 72px; background:var(--red); color:#fbf3e4; padding:28px 32px; text-align:center; position:relative;
+  -webkit-mask: radial-gradient(circle 12px at 0 50%, transparent 98%, #000) left / 51% 100% no-repeat, radial-gradient(circle 12px at 100% 50%, transparent 98%, #000) right / 51% 100% no-repeat;
+          mask: radial-gradient(circle 12px at 0 50%, transparent 98%, #000) left / 51% 100% no-repeat, radial-gradient(circle 12px at 100% 50%, transparent 98%, #000) right / 51% 100% no-repeat; }
+.ticket b { display:block; font-size:22px; letter-spacing:.3em; } .ticket span { font:italic 500 17px "Cormorant Garamond", serif; letter-spacing:.1em; }
+footer { border-top:3px double var(--line); text-align:center; padding:28px 16px 40px; font-size:14px; color:var(--mute); }
+footer a { color:var(--ink); font-weight:700; }
+@media (max-width:720px) { .hero { grid-template-columns:1fr; } .tate { height:auto; writing-mode:horizontal-tb; font-size:34px; } .cols { grid-template-columns:1fr; } .cols article { border-right:0; border-bottom:1px solid var(--line); } }
+</style>
+</head>
+<body>
+<header class="top"><small>Hokkaido University Coffee Society</small><h1>北大珈琲研究会</h1></header>
+<div class="rule"></div>
+<nav><ul><li><a href="#" aria-current="page">ホーム</a></li><li><a href="#">焙煎豆</a></li><li><a href="#">記録</a></li><li><a href="#">私たち</a></li><li><a href="#">お問い合わせ</a></li></ul></nav>
+<section class="hero">
+  <h2 class="tate">エルムの杜で、<br><em>珈琲</em>を焙る。</h2>
+  <div class="frame"><div>
+    <p class="since">— est. on the Sapporo campus —</p>
+    <h2>研究会より</h2>
+    <p>私ども北大珈琲研究会は、生豆を選び、焙煎し、淹れ、その味を記録する学生の集まりでございます。焙煎いたしました豆は、少しずつ皆様にお分けしております。</p>
+    <p class="orn">◆ ◇ ◆</p>
+    <p style="margin:0">本日の豆　エチオピア グジ（浅煎り）／ グアテマラ（中煎り）</p>
+  </div></div>
+</section>
+<section class="cols">
+  <article><time>2026 · 10 · 25</time><h3>グアテマラを三通りに焼き分けて飲み比べた</h3><p>煎り止めの時刻だけを変え、ほかの条件はそろえて…</p></article>
+  <article><time>2026 · 10 · 12</time><h3>秋の試飲会をひらきました</h3><p>浅煎りと中深煎りを飲み比べ、好みを投票していただき…</p></article>
+  <article><time>2026 · 09 · 28</time><h3>挽き目を五段階に変えると</h3><p>ハンドミルの目盛りを二つずつ変えて同じレシピで…</p></article>
+</section>
+<div class="ticket"><b>豆のお取り置き</b><span>Freshly roasted, by request</span></div>
+<footer>Instagram　<a href="https://www.instagram.com/hu_coffee/" rel="noopener noreferrer" target="_blank">@hu_coffee</a><br>© 北大珈琲研究会</footer>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{%- comment -%}
+  測定IDが空なら何も読み込まない。インラインスクリプトは CSP で禁じているので、
+  gtag の初期化は外部ファイル（analytics.js）に置き、ID は data 属性で渡す。
+{%- endcomment -%}
+{%- if site.google_analytics != "" -%}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
+<script src="{{ '/assets/js/analytics.js' | relative_url }}" data-ga-id="{{ site.google_analytics }}"></script>
+{%- endif -%}
