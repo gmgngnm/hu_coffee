@@ -1,14 +1,11 @@
 # サイトを組み立てて GitHub Pages に公開する。
 #   ・main に変更が入ったとき（管理画面からの更新も含む）
-#   ・6時間ごと（Instagram の新しい投稿を拾うため）
 #   ・Actions の画面から手動で
 name: サイトを公開
 
 on:
   push:
     branches: [main]
-  schedule:
-    - cron: "23 */6 * * *"
   workflow_dispatch:
 
 permissions:
@@ -24,32 +21,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      # step の if からは secrets を直接見られないので、有無だけをここで受け取る
-      HAS_GH_PAT: ${{ secrets.GH_PAT != '' }}
     steps:
       - uses: actions/checkout@v4
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      - name: Instagram の最新投稿を取得
-        env:
-          IG_TOKEN: ${{ secrets.IG_TOKEN }}
-          IG_NEW_TOKEN_FILE: ${{ runner.temp }}/ig_token
-        run: python scripts/fetch_instagram.py
-
-      # トークンの期限（60日）を延ばした値を Secret に書き戻す。
-      # GH_PAT（Secrets を書き換えられるトークン）を登録したときだけ動く
-      - name: Instagram のトークンを更新
-        if: github.event_name == 'schedule' && env.HAS_GH_PAT == 'true'
-        env:
-          GH_TOKEN: ${{ secrets.GH_PAT }}
-        run: |
-          f="${{ runner.temp }}/ig_token"
-          if [ -s "$f" ]; then gh secret set IG_TOKEN --repo "$GITHUB_REPOSITORY" < "$f" && echo "更新しました"; fi
-          rm -f "$f"
 
       - uses: actions/configure-pages@v5
 

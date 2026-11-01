@@ -125,16 +125,20 @@ collections:
                 fields:
                   - { name: size, label: 内容量, widget: string, hint: "例：100g" }
                   - { name: price, label: 価格（円）, widget: number, value_type: int, min: 0 }
-      - name: instagram_pick
+      - name: instagram_cards
         label: Instagram の表示
-        file: _data/instagram_pick.yml
+        file: _data/instagram_cards.yml
         fields:
           - name: posts
-            label: ホームに出す投稿のURL（3件まで）
-            label_singular: 投稿のURL
+            label: ホームに出す投稿（上から2件を表示）
+            label_singular: 投稿
             widget: list
-            field: { name: url, label: URL, widget: string }
-            hint: "投稿の「…」→「リンクをコピー」で取れるURL。自動取得を設定すると、そちらの最新3件が優先されます"
+            summary: "{{fields.date}}"
+            fields:
+              - { name: date, label: 投稿日, widget: datetime, format: "YYYY-MM-DD", time_format: false }
+              - { name: image, label: 画像, widget: image, media_folder: /assets/img/instagram, public_folder: /assets/img/instagram }
+              - { name: url, label: 投稿のURL, widget: string, required: false, hint: "投稿の「…」→「リンクをコピー」。空欄ならアカウントのページへ" }
+              - { name: caption, label: 本文の冒頭, widget: text, hint: "長くても4行ほどで切れて表示されます" }
       - name: club
         label: 研究会の情報
         file: _data/club.yml

@@ -31,15 +31,6 @@ nav: home
   </div>
 </section>
 
-{%- comment -%}
-  Instagram の最新3件。Actions が取ってきた投稿（_data/instagram.json）があればそれを、
-  まだ無ければ管理画面で選んだ投稿（_data/instagram_pick.yml）を、公式の埋め込みで出す。
-{%- endcomment -%}
-{%- assign ig_urls = "" | split: "" -%}
-{%- for g in ig limit: 3 -%}{%- assign ig_urls = ig_urls | push: g.permalink -%}{%- endfor -%}
-{%- if ig_urls.size == 0 -%}
-  {%- for u in site.data.instagram_pick.posts limit: 3 -%}{%- if u != "" -%}{%- assign ig_urls = ig_urls | push: u -%}{%- endif -%}{%- endfor -%}
-{%- endif -%}
 {%- assign total = site.posts | size -%}
 
 <div class="wrap home-lower">
@@ -58,40 +49,36 @@ nav: home
   </section>
   {%- endif %}
 
+  {%- comment -%}
+    Instagram の投稿を、1つの枠の中に2件まとめて出す。中身は _data/instagram_cards.yml（管理画面で編集）。
+  {%- endcomment -%}
+  {%- assign profile = "https://www.instagram.com/" | append: site.instagram | append: "/" -%}
   <aside class="home-ig" aria-labelledby="home-ig-head">
     <div class="sec-head">
       <h2 id="home-ig-head">Instagram</h2>
-      <a class="more" href="https://www.instagram.com/{{ site.instagram }}/" target="_blank" rel="noopener noreferrer">@{{ site.instagram }} →</a>
     </div>
-    {%- if ig_urls.size > 0 %}
-    <div class="ig-embeds">
-      {%- for u in ig_urls %}
-      <blockquote class="instagram-media" data-instgrm-permalink="{{ u | split: '?' | first }}?utm_source=ig_embed" data-instgrm-version="14">
-        <a href="{{ u | split: '?' | first }}" target="_blank" rel="noopener noreferrer">Instagram でこの投稿を見る</a>
-      </blockquote>
-      {%- endfor %}
+    <div class="ig-feed">
+      <header class="ig-feed__head">
+        <img class="ig-feed__avatar" src="{{ '/assets/img/instagram/avatar.png' | relative_url }}" alt="" width="36" height="36">
+        <span class="ig-feed__user">{{ site.instagram }}</span>
+        <a class="ig-feed__btn" href="{{ profile }}" target="_blank" rel="noopener noreferrer">プロフィールを表示</a>
+      </header>
+      <ul class="ig-feed__list">
+        {%- for g in site.data.instagram_cards.posts limit: 2 %}
+        {%- assign link = g.url | default: profile -%}
+        <li>
+          <a class="ig-feed__item" href="{{ link }}" target="_blank" rel="noopener noreferrer">
+            <img class="ig-feed__img" src="{{ g.image | relative_url }}" alt="" width="720" height="720" loading="lazy">
+            <span class="ig-feed__text">
+              <time datetime="{{ g.date | date: '%Y-%m-%d' }}">{{ g.date | date: "%-m月%-d日" }}</time>
+              <span class="ig-feed__cap">{{ g.caption | escape | newline_to_br }}</span>
+            </span>
+          </a>
+        </li>
+        {%- endfor %}
+      </ul>
+      <a class="ig-feed__more" href="{{ profile }}" target="_blank" rel="noopener noreferrer">Instagramでもっと見る</a>
     </div>
-    <script async src="https://www.instagram.com/embed.js"></script>
-    {%- else %}
-    {%- comment -%} 埋め込みに使う URL がまだ無いあいだは、手元に置いた投稿を埋め込みと同じ見た目で出す {%- endcomment -%}
-    {%- assign profile = "https://www.instagram.com/" | append: site.instagram | append: "/" -%}
-    <div class="ig-embeds">
-      {%- for g in site.data.instagram_cards.posts limit: 3 %}
-      {%- assign link = g.url | default: profile -%}
-      <article class="ig-post">
-        <header class="ig-post__head">
-          <img class="ig-post__avatar" src="{{ '/assets/img/instagram/avatar.png' | relative_url }}" alt="" width="32" height="32">
-          <span class="ig-post__user">{{ site.instagram }}</span>
-          <a class="ig-post__btn" href="{{ profile }}" target="_blank" rel="noopener noreferrer">プロフィールを表示</a>
-        </header>
-        <a href="{{ link }}" target="_blank" rel="noopener noreferrer"><img class="ig-post__img" src="{{ g.image | relative_url }}" alt="Instagram の投稿：{{ g.caption | newline_to_br | split: '<br />' | first | strip | escape }}" width="720" height="720" loading="lazy"></a>
-        <a class="ig-post__more" href="{{ link }}" target="_blank" rel="noopener noreferrer">Instagramでもっと見る</a>
-        <p class="ig-post__cap"><b>{{ site.instagram }}</b> {{ g.caption | escape | newline_to_br }}</p>
-        <time class="ig-post__date" datetime="{{ g.date | date: '%Y-%m-%d' }}">{{ g.date | date: "%-m月%-d日" }}</time>
-      </article>
-      {%- endfor %}
-    </div>
-    {%- endif %}
   </aside>
 
   <section class="home-visit">

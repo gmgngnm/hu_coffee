@@ -6,7 +6,7 @@ GitHub Pages（無料・常時HTTPS）で公開する静的サイトです。ブ
 - **管理画面（おすすめ）**：`https://gmgngnm.github.io/hu_coffee/admin/` に GitHub アカウントでログインして、記事・豆・研究会の情報を書き換える（Decap CMS）
 - **ファイルを直接編集**：GitHub の画面やエディタで書き換えて push する
 
-どちらでも、保存してから2〜3分でサイトに反映されます。
+どちらでも、保存してから2〜3分でサイトに反映されます（公開は `.github/workflows/pages.yml` が自動で行う）。
 
 | ページ | ファイル |
 |---|---|
@@ -19,7 +19,7 @@ GitHub Pages（無料・常時HTTPS）で公開する静的サイトです。ブ
 | 研究会の情報（活動日など） | `_data/club.yml` |
 | 管理画面 | `admin/`（設定は `admin/config.yml`） |
 | 管理画面のログイン中継 | `cms-auth/`（Cloudflare に置く。サイトには含まれない） |
-| Instagram の取得 | `scripts/fetch_instagram.py` ／ `.github/workflows/pages.yml` |
+| Instagram 欄の投稿 | `_data/instagram_cards.yml` ／ 画像は `assets/img/instagram/` |
 | ロゴ・アイコン | `assets/img/`（ヘッダーは `logo.png` と手書きの `hu_coffee-sign.png`、`favicon-32.png` などがアイコン） |
 | デザイン案 B・C | `proposals/` |
 
@@ -28,7 +28,7 @@ GitHub Pages（無料・常時HTTPS）で公開する静的サイトです。ブ
 ## 1. 公開する（最初に一度だけ）
 
 1. リポジトリの **Settings → Pages** を開く
-2. **Source** を「**GitHub Actions**」にする（Instagram の取得をビルドに組み込んでいるため、「Deploy from a branch」ではなくこちら）
+2. **Source** を「**GitHub Actions**」にする
 3. **Actions** タブの「サイトを公開」→「Run workflow」で一度動かす。数分後、`https://gmgngnm.github.io/hu_coffee/` で見られるようになる
 4. 同じ画面の **Enforce HTTPS** にチェック（常時SSL化。標準でオンのはず）
 
@@ -72,25 +72,14 @@ GitHub Pages はサーバーを持たないので、フォームの送信は [Fo
 
 > 独自ドメインにしたら、OAuth App の Homepage URL、`ALLOWED_ORIGIN`、`admin/config.yml` の `site_url` などもそのドメインに変える。
 
-### Instagram の最新投稿を表示する
+### Instagram の投稿を表示する
 
-ホームの「活動ブログ」の右に、Instagram 公式の埋め込みで最新3件を並べます。出す投稿の決め方は2通りです。
+ホームの「活動ブログ」の右に、Instagram と同じ見た目の枠を1つ置き、その中に投稿を2件並べています。
+Instagram とは連携していないので、投稿を入れ替えるときは手で差し替えます。
 
-- **手で選ぶ（すぐできる）**：管理画面の「サイトの情報 → Instagram の表示」に、投稿の URL（投稿の「…」→「リンクをコピー」）を3件まで貼る
-- **自動で最新3件（下の手順）**：6時間ごとと、サイトを更新するたびに GitHub Actions が最新の投稿を取りに行く。設定すると、手で選んだ投稿より優先される
-
-どちらも未設定のあいだは、`_data/instagram_cards.yml` に置いた投稿（いまは 9/30・10/1・10/23 の3件）を、埋め込みと同じ見た目で出します。アクセス用の鍵（トークン）は GitHub の Secret にだけ置き、ページには出しません。
-
-1. Instagram アプリで、`@hu_coffee` を **プロアカウント（クリエイターまたはビジネス）** に切り替える（無料。設定 → アカウントの種類とツール）
-2. <https://developers.facebook.com/> に登録してアプリを作成。用途に「Instagram でメッセージとコンテンツを管理」を選ぶ
-3. 「Instagram ログインによる API 設定」で `@hu_coffee` を追加し、**アクセストークンを生成**してコピー（Meta の画面は名前がときどき変わります）
-4. GitHub のリポジトリ → Settings → Secrets and variables → Actions → New repository secret で、名前 `IG_TOKEN`、値にトークンを貼る
-5. **トークンの期限（60日）を自動で延ばす**ために、もう一つ Secret を作る
-   1. GitHub 右上のアイコン → Settings → Developer settings → Personal access tokens → **Fine-grained tokens** → Generate new token
-   2. Repository access：`hu_coffee` だけ ／ Permissions：**Secrets を Read and write** ／ 期限は1年など
-   3. 出てきたトークンを、名前 `GH_PAT` の Secret として登録
-   4. これを入れないと、60日ごとに手順3〜4をやり直す必要があります。`GH_PAT` 自体の期限が来たら作り直す
-6. Actions タブの「サイトを公開」→「Run workflow」で反映
+1. Instagram で載せたい投稿を開き、画像を保存する（またはスクリーンショットから切り出す）
+2. 管理画面の「サイトの情報 → Instagram の表示」で、新しい投稿を一番上に追加する（投稿日・画像・本文の冒頭、分かれば投稿の URL）
+3. 上から2件が表示される。古いものは消してよい
 
 ## 3. 日々の更新
 

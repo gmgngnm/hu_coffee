@@ -1,8 +1,8 @@
-# Instagram の自動取得を設定するまで、ホームに出しておく投稿（新しい順に3件）。
-# 自動取得（README の「Instagram の最新投稿を表示する」）か、管理画面で選んだ投稿の URL があれば、そちらが優先される。
+# ホームの Instagram 欄に出す投稿。上から2件を表示する（新しいものを上に）。
+# 管理画面（/admin/）の「サイトの情報 → Instagram の表示」からも編集できる。
 #   image:   assets/img/instagram/ に置いた画像
 #   url:     投稿の URL（分かれば。空ならアカウントのページへ）
-#   caption: 本文の冒頭（長くても3行ほどで切れて表示される）
+#   caption: 本文の冒頭（長くても4行ほどで切れて表示される）
 posts:
   - date: 2026-10-23
     image: /assets/img/instagram/2026-10-23.jpg
