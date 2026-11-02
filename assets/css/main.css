@@ -193,7 +193,7 @@ h1, h2, h3 { font-family: var(--f-head); font-weight: 400; line-height: 1.45; le
 .hero__body p { margin: 0 0 1.1em; font-size: clamp(15.5px, 1.7vw, 17px); line-height: 2; }
 .ph { display: inline-block; }
 /* 最後のひとことは、ノートに書き足したように少し大きく、下線をマーカーで */
-.hero__body .hero__cheers { font: 500 clamp(18px, 2.4vw, 22px)/1.8 var(--f-head); margin-top: 1.6em; }
+.hero__body .hero__cheers { font: 400 clamp(18px, 2.4vw, 22px)/1.8 var(--f-head); margin-top: 1.6em; }
 .hero__cheers span { background: linear-gradient(transparent 62%, rgba(155, 28, 46, .16) 62%); }
 .hero__actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; }
 
