@@ -194,6 +194,8 @@ h1, h2, h3 { font-family: var(--f-head); font-weight: 400; line-height: 1.45; le
 .ph { display: inline-block; }
 /* 最後のひとことは、ノートに書き足したように少し大きく、下線をマーカーで */
 .hero__body .hero__cheers { font: 400 clamp(18px, 2.4vw, 22px)/1.8 var(--f-head); margin-top: 1.6em; }
+/* 絵文字の代わりの手描き風カップ。文字と同じ色・同じ高さで */
+.cup-ill { display: inline-block; width: 1.25em; height: 1.1em; margin-left: .25em; vertical-align: -.12em; color: var(--bean); }
 .hero__cheers span { background: linear-gradient(transparent 62%, rgba(155, 28, 46, .16) 62%); }
 .hero__actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; }
 
